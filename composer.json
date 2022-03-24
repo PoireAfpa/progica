@@ -33,7 +33,11 @@
         "symfony/property-access": "6.0.*",
         "symfony/property-info": "6.0.*",
         "symfony/proxy-manager-bridge": "6.0.*",
+<<<<<<< HEAD
         "symfony/runtime": "^6.0",
+=======
+        "symfony/runtime": "6.0.*",
+>>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
         "symfony/security-bundle": "6.0.*",
         "symfony/serializer": "6.0.*",
         "symfony/string": "6.0.*",
