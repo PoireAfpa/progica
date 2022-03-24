@@ -7,6 +7,12 @@
 /public/bundles/
 /var/
 /vendor/
+**/migrations/
+*/migrations/
+**/migrations
+*/migrations
+/migrations/
+/migrations
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###
@@ -15,3 +21,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+

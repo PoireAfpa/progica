@@ -50,7 +50,7 @@ class ProductContact
     private $contactProduct;
 
     /**
-     * @ORM\OneToMany(targetEntity=AvailabilityContact::class, mappedBy="availability", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=AvailabilityContact::class, mappedBy="productContact", orphanRemoval=true)
      */
     private $availabilityContacts;
 

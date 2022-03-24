@@ -36,7 +36,7 @@ class AvailabilityContact
      * @ORM\ManyToOne(targetEntity=ProductContact::class, inversedBy="availabilityContacts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $availability;
+    private $productContact;
 
     public function getId(): ?int
     {
@@ -81,12 +81,12 @@ class AvailabilityContact
 
     public function getAvailability(): ?ProductContact
     {
-        return $this->availability;
+        return $this->productContact;
     }
 
-    public function setAvailability(?ProductContact $availability): self
+    public function setAvailability(?ProductContact $productContact): self
     {
-        $this->availability = $availability;
+        $this->productContact = $productContact;
 
         return $this;
     }
