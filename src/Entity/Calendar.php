@@ -33,14 +33,11 @@ class Calendar
      */
     private $productCalendar;
 
-<<<<<<< HEAD
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
-=======
->>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
     public function getId(): ?int
     {
         return $this->id;
@@ -81,7 +78,6 @@ class Calendar
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function getSlug(): ?string
     {
@@ -94,6 +90,4 @@ class Calendar
 
         return $this;
     }
-=======
->>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
 }

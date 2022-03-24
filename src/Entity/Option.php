@@ -40,14 +40,11 @@ class Option
      */
     private $optionCosts;
 
-<<<<<<< HEAD
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
-=======
->>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
     public function __construct()
     {
         $this->productOption = new ArrayCollection();
@@ -136,7 +133,6 @@ class Option
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function getSlug(): ?string
     {
@@ -149,6 +145,4 @@ class Option
 
         return $this;
     }
-=======
->>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
 }
