@@ -96,17 +96,7 @@ class Product
      */
     private $optionCosts;
 
-    /**
-<<<<<<< HEAD
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
-=======
-     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="productLocation")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $location;
->>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
+  
 
     public function __construct()
     {
@@ -351,26 +341,4 @@ class Product
         return $this;
     }
 
-<<<<<<< HEAD
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-=======
-    public function getLocation(): ?Location
-    {
-        return $this->location;
-    }
-
-    public function setLocation(?Location $location): self
-    {
-        $this->location = $location;
->>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
-
-        return $this;
-    }
 }
