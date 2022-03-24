@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-
-use App\Entity\Departments;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,7 +64,7 @@ class Cities
     private $gpsLng;
 
     /**
-     * @var \Departments
+     * @var Departments
      *
      * @ORM\ManyToOne(targetEntity="Departments")
      * @ORM\JoinColumns({
