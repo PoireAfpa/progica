@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New OptionCost{% endblock %}
+
+{% block body %}
+    <h1>Create new OptionCost</h1>
+
+    {{ include('option_cost/_form.html.twig') }}
+
+    <a href="{{ path('app_option_cost_index') }}">back to list</a>
+{% endblock %}

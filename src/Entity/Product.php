@@ -70,12 +70,6 @@ class Product
     private $animalCost;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $productOwner;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Option::class, mappedBy="productOption")
      */
     private $options;
@@ -97,16 +91,16 @@ class Product
     private $optionCosts;
 
     /**
-<<<<<<< HEAD
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
-=======
-     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="productLocation")
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $location;
->>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
+    private $productOwner;
+
 
     public function __construct()
     {
@@ -240,18 +234,6 @@ class Product
         return $this;
     }
 
-    public function getProductOwner(): ?User
-    {
-        return $this->productOwner;
-    }
-
-    public function setProductOwner(?User $productOwner): self
-    {
-        $this->productOwner = $productOwner;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Option>
      */
@@ -351,7 +333,8 @@ class Product
         return $this;
     }
 
-<<<<<<< HEAD
+
+
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -360,17 +343,22 @@ class Product
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-=======
-    public function getLocation(): ?Location
-    {
-        return $this->location;
+
     }
 
-    public function setLocation(?Location $location): self
+    public function getProductOwner(): ?User
+
     {
-        $this->location = $location;
->>>>>>> fb259ce64207e7fd046595f09986b02fefc07b1e
+        return $this->productOwner;
+    }
+
+    public function setProductOwner(?User $productOwner): self
+    {
+
+
+        $this->productOwner = $productOwner;
 
         return $this;
     }
+
 }
