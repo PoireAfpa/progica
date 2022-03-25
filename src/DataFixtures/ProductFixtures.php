@@ -43,7 +43,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $Product->setAnimal($faker->boolean());
             $Product->setAnimalCost($faker->randomFloat(2,0,100));
             $Product->addCalendar($faker->randomElement($calendars));
-            $Product->addOption($faker->randomElement($options));
+            for($j=1;$j<5;$j++){
+                $Product->addOption($faker->randomElement($options));
+            }
             $Product->addOptionCost($faker->randomElement($otptionsCosts));
             $Product->setProductContact($faker->randomElement($users));
             $Product->setProductOwner($faker->randomElement($productOwners));
