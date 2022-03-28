@@ -4,13 +4,12 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Contact;
-use App\Entity\AvailabilityContact;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class ContactFixtures extends Fixture implements DependentFixtureInterface
+class ContactFixtures extends Fixture 
 {
     protected $slugger;
     public function __construct(SluggerInterface $slugger)
@@ -21,20 +20,20 @@ class ContactFixtures extends Fixture implements DependentFixtureInterface
     {
         
         $faker = Factory::create('fr_FR');
-        $availabilities=$manager->getRepository(AvailabilityContact::class)->findAll();
-        $products = $manager->getRepository(Product::class)->findAll();
-        dd($products);
+     
+        
+        
+        
        
 
-     foreach($products as $product){
+     for($i=1;$i<30;$i++){
 
             $contact= new Contact();
             $contact->setEmail($faker->email());
             $contact->setFirstName($faker->firstName());
             $contact->setLastName($faker->lastName());
             $contact->setMessage($faker->paragraph(2));
-            $contact->addAvailability($faker->randomElement($availabilities));
-            $contact->setSlug(strtolower($this->slugger->slug($product->getTitle())));
+            $contact->setSlug(strtolower($this->slugger->slug($contact->getFirstName())));
             $manager->persist($contact);
      }
           
@@ -42,10 +41,6 @@ class ContactFixtures extends Fixture implements DependentFixtureInterface
  
     $manager->flush();
     }
-    public function getDependencies(): array
-    {
-        return [ProductFixtures::class];
-        return [AvailabilityContactFixtures::class];
-    }
+   
    
 }
