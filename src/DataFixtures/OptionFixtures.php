@@ -19,7 +19,7 @@ class OptionFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
-        //$faker = Factory::create('fr_FR');
+        $faker = Factory::create('fr_FR');
         
       
       
@@ -107,7 +107,7 @@ class OptionFixtures extends Fixture
         $manager->persist($service3);
 
         $service4 = new Option;
-        $service4->setName("Petit-déjeuner");
+        $service4->setName("Wifi");
         $service4->setType("Service");
         $service4->setSlug(strtolower($this->slugger->slug($service4->getName())));
         $manager->persist($service4);
@@ -118,7 +118,7 @@ class OptionFixtures extends Fixture
 
     
     
-    $manager->flush();
+
     }
    
 }

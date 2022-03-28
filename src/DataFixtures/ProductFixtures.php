@@ -25,7 +25,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
         
-        $users = $manager->getRepository(User::class)->findAll();
+        
         $otptionsCosts = $manager->getRepository(OptionCost::class)->findAll();
         $calendars = $manager->getRepository(Calendar::class)->findAll();
         $productOwners=$manager->getRepository(User::class)->findAll('OWNER');

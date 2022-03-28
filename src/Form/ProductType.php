@@ -21,6 +21,7 @@ class ProductType extends AbstractType
             ->add('room')
             ->add('people')
             ->add('animal')
+            ->add('smoker')
             ->add('animalCost')
             ->add('slug')
             ->add('productOwner')

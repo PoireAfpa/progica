@@ -8,6 +8,7 @@ use App\DataFixtures\UserFixtures;
 use App\DataFixtures\OptionFixtures;
 use App\DataFixtures\ContactFixtures;
 use App\DataFixtures\CalendarFixtures;
+use App\Entity\OptionCost;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -20,16 +21,12 @@ class OptionCostFixtures extends Fixture implements DependentFixtureInterface
         $products=$manager->getRepository(Product::class)->findAll();
         $options=$manager->getRepository(Option::class)->findAll();
 
-            foreach($products as $product){
-
-
-
-
-
-
-
-
-            }
+            foreach($options as $option){
+                $optionCost=  new OptionCost;
+                $optionCost->getProduct($faker->randomElement($products));
+                $optionCost->setPrice($faker->randomFloat(2,0,100));
+                }
+           
 
         $manager->flush();
     }
