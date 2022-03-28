@@ -35,6 +35,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     }
     public function getDependencies(): array
     {
-        return [productFixtures::class];
+        return [ProductFixtures::class];
     }
 }

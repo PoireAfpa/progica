@@ -30,6 +30,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         $calendars = $manager->getRepository(Calendar::class)->findAll();
         $productOwners=$manager->getRepository(User::class)->findAll('OWNER');
         $contacts = $manager->getRepository(Contact::class)->findAll();
+        
         for ($i=1; $i<30; $i++){
             $product= new Product();
             $product->setTitle($faker->words(3, true));
