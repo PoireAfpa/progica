@@ -47,10 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $tel;
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $role = [];
+   
 
     /**
      * @ORM\Column(type="string", length=255)
