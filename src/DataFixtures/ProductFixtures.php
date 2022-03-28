@@ -29,6 +29,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         $otptionsCosts = $manager->getRepository(OptionCost::class)->findAll();
         $calendars = $manager->getRepository(Calendar::class)->findAll();
         $productOwners=$manager->getRepository(User::class)->findAll('OWNER');
+        dd($productOwners);
         $contacts = $manager->getRepository(Contact::class)->findAll();
         
         for ($i=1; $i<30; $i++){
@@ -47,7 +48,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->addCalendar($faker->randomElement($calendars));      
             $product->addOptionCost($faker->randomElement($otptionsCosts));
             $product->setContact($faker->randomElement($contacts));
-            $product->setproductOwner($faker->randomElement($productOwners));
+            $product->setProductOwner($faker->randomElement($productOwners));
             $product->setSlug(strtolower($this->slugger->slug($product->getTitle())));
             $manager->persist($product);
     

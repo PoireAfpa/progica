@@ -14,6 +14,7 @@ class CalendarFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
         $products = $manager->getRepository(Product::class)->findAll();
+       
         foreach($products as $product){
             $calendar= new Calendar();
             $calendar->setDateStart(\DateTimeImmutable::createFromMutable($faker()->datetime()));

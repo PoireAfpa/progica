@@ -23,6 +23,7 @@ class ContactFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create('fr_FR');
         $availabilities=$manager->getRepository(AvailabilityContact::class)->findAll();
         $products = $manager->getRepository(Product::class)->findAll();
+        dd($products);
        
 
      foreach($products as $product){
@@ -43,7 +44,7 @@ class ContactFixtures extends Fixture implements DependentFixtureInterface
     }
     public function getDependencies(): array
     {
-        return [productFixtures::class];
+        return [ProductFixtures::class];
         return [AvailabilityContactFixtures::class];
     }
    

@@ -17,6 +17,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create('fr_FR');
         $roles=['OWNER','ADMIN','CUSTOMER'];
         $products = $manager->getRepository(Product::class)->findAll();
+        dd($products);
        
 
         for ($i=1; $i<50; $i++){
