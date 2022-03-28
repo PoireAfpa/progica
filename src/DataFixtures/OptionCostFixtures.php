@@ -21,10 +21,15 @@ class OptionCostFixtures extends Fixture implements DependentFixtureInterface
         $products=$manager->getRepository(Product::class)->findAll();
         $options=$manager->getRepository(Option::class)->findAll();
 
-            foreach($options as $option){
-                $optionCost=  new OptionCost;
-                $optionCost->getProduct($faker->randomElement($products));
-                $optionCost->setPrice($faker->randomFloat(2,0,100));
+            foreach($products as $product){
+                    foreach($options as $option){
+                          $optionCost=  new OptionCost;
+                          $optionCost->setOption($option);
+                          $optionCost->setProduct($product);
+                          $optionCost->setPrice($faker->randomFloat(2,0,100));
+                          
+                    }
+                $manager->persist($optionCost);
                 }
            
 
@@ -34,8 +39,5 @@ class OptionCostFixtures extends Fixture implements DependentFixtureInterface
     {
         return [OptionFixtures::class];
         return [Product::class];
-        return [ContactFixtures::class];
-        return [CalendarFixtures::class];
-        return [UserFixtures::class];
     }
 }
