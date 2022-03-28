@@ -13,15 +13,15 @@ class AvailabilityContactFixtures extends Fixture implements DependentFixtureInt
 {
     public function load(ObjectManager $manager): void
     {   $faker = Factory::create('fr_FR');
-    
+        $week=['lundi', 'mardi', 'mercredi' ,'jeudi', 'vendredi'];
         $contacts = $manager->getRepository(Contact::class)->findAll();
         
        
       for($i=1;$i<30;$i++){
             $availabilityContact= new AvailabilityContact();
-            $availabilityContact->setDay($faker->dayOfWeek(5));
-            $availabilityContact->setHourStart($faker->time('H:i'));
-            $availabilityContact->setHourEnd($faker->time('H:i'));
+            $availabilityContact->setDay($faker->randomElement($week));
+            $availabilityContact->setHourStart($faker->numberBetween(6,14).":00");
+            $availabilityContact->setHourEnd(strval(intval($availabilityContact->getHourStart())+8).":00");
             $availabilityContact->setContact($faker->randomElement($contacts));
             $manager->persist($availabilityContact); 
         }

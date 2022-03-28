@@ -20,8 +20,8 @@ class CalendarFixtures extends Fixture implements DependentFixtureInterface
        
         for($i=1;$i<30;$i++){
             $calendar= new Calendar();
-            $calendar->setDateStart(DateTimeImmutable::createFromMutable($faker->datetime()));
-            $calendar->setDateEnd(DateTimeImmutable::createFromMutable($faker->datetime()));
+            $calendar->setDateStart(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth('+1 week')));
+            $calendar->setDateEnd(DateTimeImmutable::createFromMutable($faker->datetimeThisMonth('+6 months')));
             $calendar->setProduct($faker->randomElement($products));
             $manager->persist($calendar);
 
