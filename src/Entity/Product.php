@@ -65,30 +65,14 @@ class Product
     private $animal;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $smoker;
+
+    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $animalCost;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Option::class, mappedBy="productOption")
-     */
-    private $options;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=ProductContact::class, inversedBy="contactProduct")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $productContact;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="productCalendar", orphanRemoval=true)
-     */
-    private $calendars;
-
-    /**
-     * @ORM\OneToMany(targetEntity=OptionCost::class, mappedBy="productOptionCost", orphanRemoval=true)
-     */
-    private $optionCosts;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -96,17 +80,37 @@ class Product
     private $slug;
 
     /**
+     * @ORM\OneToMany(targetEntity=OptionCost::class, mappedBy="product", orphanRemoval=true)
+     */
+    private $optionCosts;
+
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $productOwner;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="product", orphanRemoval=true)
+     */
+    private $calendars;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $location;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Contact::class, inversedBy="product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contact;
 
     public function __construct()
     {
-        $this->options = new ArrayCollection();
-        $this->calendars = new ArrayCollection();
         $this->optionCosts = new ArrayCollection();
+        $this->calendars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -222,6 +226,18 @@ class Product
         return $this;
     }
 
+    public function getSmoker(): ?bool
+    {
+        return $this->smoker;
+    }
+
+    public function setSmoker(bool $smoker): self
+    {
+        $this->smoker = $smoker;
+
+        return $this;
+    }
+
     public function getAnimalCost(): ?float
     {
         return $this->animalCost;
@@ -234,71 +250,14 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Option>
-     */
-    public function getOptions(): Collection
+    public function getSlug(): ?string
     {
-        return $this->options;
+        return $this->slug;
     }
 
-    public function addOption(Option $option): self
+    public function setSlug(string $slug): self
     {
-        if (!$this->options->contains($option)) {
-            $this->options[] = $option;
-            $option->addProductOption($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOption(Option $option): self
-    {
-        if ($this->options->removeElement($option)) {
-            $option->removeProductOption($this);
-        }
-
-        return $this;
-    }
-
-    public function getProductContact(): ?ProductContact
-    {
-        return $this->productContact;
-    }
-
-    public function setProductContact(?ProductContact $productContact): self
-    {
-        $this->productContact = $productContact;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Calendar>
-     */
-    public function getCalendars(): Collection
-    {
-        return $this->calendars;
-    }
-
-    public function addCalendar(Calendar $calendar): self
-    {
-        if (!$this->calendars->contains($calendar)) {
-            $this->calendars[] = $calendar;
-            $calendar->setProductCalendar($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCalendar(Calendar $calendar): self
-    {
-        if ($this->calendars->removeElement($calendar)) {
-            // set the owning side to null (unless already changed)
-            if ($calendar->getProductCalendar() === $this) {
-                $calendar->setProductCalendar(null);
-            }
-        }
+        $this->slug = $slug;
 
         return $this;
     }
@@ -315,7 +274,7 @@ class Product
     {
         if (!$this->optionCosts->contains($optionCost)) {
             $this->optionCosts[] = $optionCost;
-            $optionCost->setProductOptionCost($this);
+            $optionCost->setProduct($this);
         }
 
         return $this;
@@ -325,40 +284,77 @@ class Product
     {
         if ($this->optionCosts->removeElement($optionCost)) {
             // set the owning side to null (unless already changed)
-            if ($optionCost->getProductOptionCost() === $this) {
-                $optionCost->setProductOptionCost(null);
+            if ($optionCost->getProduct() === $this) {
+                $optionCost->setProduct(null);
             }
         }
 
         return $this;
     }
 
-
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-        return $this;
-    }
-
     public function getProductOwner(): ?User
-
     {
         return $this->productOwner;
     }
 
     public function setProductOwner(?User $productOwner): self
     {
-
-
         $this->productOwner = $productOwner;
 
         return $this;
     }
 
+    /**
+     * @return Collection<int, Calendar>
+     */
+    public function getCalendars(): Collection
+    {
+        return $this->calendars;
+    }
+
+    public function addCalendar(Calendar $calendar): self
+    {
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): self
+    {
+        if ($this->calendars->removeElement($calendar)) {
+            // set the owning side to null (unless already changed)
+            if ($calendar->getProduct() === $this) {
+                $calendar->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): self
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
 }

@@ -28,15 +28,15 @@ class AvailabilityContact
     private $hourStart;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Contact::class, inversedBy="availabilities")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contact;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $hourEnd;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=ProductContact::class, inversedBy="availabilityContacts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $productContact;
 
     public function getId(): ?int
     {
@@ -67,6 +67,18 @@ class AvailabilityContact
         return $this;
     }
 
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): self
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
     public function getHourEnd(): ?string
     {
         return $this->hourEnd;
@@ -75,18 +87,6 @@ class AvailabilityContact
     public function setHourEnd(string $hourEnd): self
     {
         $this->hourEnd = $hourEnd;
-
-        return $this;
-    }
-
-    public function getAvailability(): ?ProductContact
-    {
-        return $this->productContact;
-    }
-
-    public function setAvailability(?ProductContact $productContact): self
-    {
-        $this->productContact = $productContact;
 
         return $this;
     }

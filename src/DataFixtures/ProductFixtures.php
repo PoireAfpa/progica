@@ -24,33 +24,31 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        $options = $manager->getRepository(Option::class)->findAll();
+        
         $users = $manager->getRepository(User::class)->findAll();
         $otptionsCosts = $manager->getRepository(OptionCost::class)->findAll();
         $calendars = $manager->getRepository(Calendar::class)->findAll();
         $productOwners=$manager->getRepository(User::class)->findAll('OWNER');
-
+        $contacts = $manager->getRepository(Contact::class)->findAll();
         for ($i=1; $i<30; $i++){
-            $Product= new Product();
-            $Product->setTitle($faker->words(3, true));
-            $Product->setDescription($faker->paragraph(1,true));
-            $Product->setImage($faker->imageUrl(360, 360, 'Ceci est un joli gite rural..', true, 'avec un peu d\'imagination', false));
-            $Product->setPeakSeasonPrice($faker->randomFloat(2,700,900));
-            $Product->setoffSeasonPrice($faker->randomFloat(2,400,600));
-            $Product->setSurface($faker->numberBetween(100,200));
-            $Product->setRoom($faker->numberBetween(2,5));
-            $Product->setPeople($faker->numberBetween(1,5));
-            $Product->setAnimal($faker->boolean());
-            $Product->setAnimalCost($faker->randomFloat(2,0,100));
-            $Product->addCalendar($faker->randomElement($calendars));
-            for($j=1;$j<5;$j++){
-                $Product->addOption($faker->randomElement($options));
-            }
-            $Product->addOptionCost($faker->randomElement($otptionsCosts));
-            $Product->setProductContact($faker->randomElement($users));
-            $Product->setProductOwner($faker->randomElement($productOwners));
-            $Product->setSlug(strtolower($this->slugger->slug($Product->getTitle())));
-            $manager->persist($Product);
+            $product= new Product();
+            $product->setTitle($faker->words(3, true));
+            $product->setDescription($faker->paragraph(1,true));
+            $product->setImage($faker->imageUrl(360, 360, 'Ceci est un joli gite rural..', true, 'avec un peu d\'imagination', false));
+            $product->setPeakSeasonPrice($faker->randomFloat(2,700,900));
+            $product->setoffSeasonPrice($faker->randomFloat(2,400,600));
+            $product->setSurface($faker->numberBetween(100,200));
+            $product->setRoom($faker->numberBetween(2,5));
+            $product->setPeople($faker->numberBetween(1,5));
+            $product->setAnimal($faker->boolean());
+            $product->setSmoker($faker->boolean());
+            $product->setAnimalCost($faker->randomFloat(2,0,100));
+            $product->addCalendar($faker->randomElement($calendars));      
+            $product->addOptionCost($faker->randomElement($otptionsCosts));
+            $product->setContact($faker->randomElement($contacts));
+            $product->setproductOwner($faker->randomElement($productOwners));
+            $product->setSlug(strtolower($this->slugger->slug($product->getTitle())));
+            $manager->persist($product);
     
     }
     $manager->flush();
@@ -59,6 +57,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         return [OptionFixtures::class];
         return [OptionCostFixtures::class];
+        return [ContactFixtures::class];
         return [CalendarFixtures::class];
         return [UserFixtures::class];
     }

@@ -22,7 +22,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         for ($i=1; $i<50; $i++){
             $user= new User();
             $user->setEmail($faker->email());
-            $user->setRoles($faker->randomElement($roles));
+            $user->setRole($faker->randomElement($roles));
             $user->setPassword($faker->password());
             $user->setFirstName($faker->firstName());
             $user->setLastName($faker->lastName());

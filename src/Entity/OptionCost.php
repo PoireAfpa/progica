@@ -26,12 +26,13 @@ class OptionCost
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="optionCosts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $productOptionCost;
+    private $product;
 
     /**
      * @ORM\ManyToOne(targetEntity=Option::class, inversedBy="optionCosts")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $optionCost;
+    private $option;
 
     public function getId(): ?int
     {
@@ -50,26 +51,26 @@ class OptionCost
         return $this;
     }
 
-    public function getProductOptionCost(): ?Product
+    public function getProduct(): ?Product
     {
-        return $this->productOptionCost;
+        return $this->product;
     }
 
-    public function setProductOptionCost(?Product $productOptionCost): self
+    public function setProduct(?Product $product): self
     {
-        $this->productOptionCost = $productOptionCost;
+        $this->product = $product;
 
         return $this;
     }
 
-    public function getOptionCost(): ?Option
+    public function getOption(): ?Option
     {
-        return $this->optionCost;
+        return $this->option;
     }
 
-    public function setOptionCost(?Option $optionCost): self
+    public function setOption(?Option $option): self
     {
-        $this->optionCost = $optionCost;
+        $this->option = $option;
 
         return $this;
     }

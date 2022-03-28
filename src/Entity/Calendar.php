@@ -31,12 +31,7 @@ class Calendar
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="calendars")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $productCalendar;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
+    private $product;
 
     public function getId(): ?int
     {
@@ -67,26 +62,14 @@ class Calendar
         return $this;
     }
 
-    public function getProductCalendar(): ?Product
+    public function getProduct(): ?Product
     {
-        return $this->productCalendar;
+        return $this->product;
     }
 
-    public function setProductCalendar(?Product $productCalendar): self
+    public function setProduct(?Product $product): self
     {
-        $this->productCalendar = $productCalendar;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
+        $this->product = $product;
 
         return $this;
     }

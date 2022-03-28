@@ -27,27 +27,22 @@ class Option
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"service","equipement"})
      */
     private $type;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="options")
-     */
-    private $productOption;
-
-    /**
-     * @ORM\OneToMany(targetEntity=OptionCost::class, mappedBy="optionCost")
-     */
-    private $optionCosts;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=OptionCost::class, mappedBy="option", orphanRemoval=true)
+     */
+    private $optionCosts;
+
     public function __construct()
     {
-        $this->productOption = new ArrayCollection();
         $this->optionCosts = new ArrayCollection();
     }
 
@@ -80,26 +75,14 @@ class Option
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProductOption(): Collection
+    public function getSlug(): ?string
     {
-        return $this->productOption;
+        return $this->slug;
     }
 
-    public function addProductOption(Product $productOption): self
+    public function setSlug(string $slug): self
     {
-        if (!$this->productOption->contains($productOption)) {
-            $this->productOption[] = $productOption;
-        }
-
-        return $this;
-    }
-
-    public function removeProductOption(Product $productOption): self
-    {
-        $this->productOption->removeElement($productOption);
+        $this->slug = $slug;
 
         return $this;
     }
@@ -116,7 +99,7 @@ class Option
     {
         if (!$this->optionCosts->contains($optionCost)) {
             $this->optionCosts[] = $optionCost;
-            $optionCost->setOptionCost($this);
+            $optionCost->setOption($this);
         }
 
         return $this;
@@ -126,22 +109,10 @@ class Option
     {
         if ($this->optionCosts->removeElement($optionCost)) {
             // set the owning side to null (unless already changed)
-            if ($optionCost->getOptionCost() === $this) {
-                $optionCost->setOptionCost(null);
+            if ($optionCost->getOption() === $this) {
+                $optionCost->setOption(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }
