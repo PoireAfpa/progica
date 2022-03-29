@@ -29,7 +29,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         
         
         $productOwners=$manager->getRepository(User::class)->findAll();  
-        $contacts = $manager->getRepository(Contact::class)->findAll();
+        $contacts = $manager->getRepository(Contact::class)->findAll(['ROLE_OWNER']);
         $locations=$manager->getRepository(Location::class)->findAll();
         for ($i=1; $i<30; $i++){
             $product= new Product();

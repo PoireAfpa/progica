@@ -21,7 +21,8 @@ class OptionCostFixtures extends Fixture implements DependentFixtureInterface
         $options=$manager->getRepository(Option::class)->findAll();
        
             foreach($products as $product){
-                    foreach($options as $option){
+                    foreach($options as $option)
+                        for($i=1;$i<=14;$i++){
                           $optionCost=  new OptionCost;
                           $optionCost->setOption($option);
                           $optionCost->setProduct($product);
