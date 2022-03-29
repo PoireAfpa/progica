@@ -16,14 +16,13 @@ class Cities
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned"=true})
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string|null
-     *
+     * @ORM\Id
      * @ORM\Column(name="insee_code", type="string", length=5, nullable=true)
      */
     private $inseeCode;
