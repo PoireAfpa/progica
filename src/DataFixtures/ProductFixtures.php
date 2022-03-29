@@ -4,11 +4,12 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\User;
-use App\Entity\Option;
-use DateTimeImmutable;
+use App\Entity\Contact;
 use App\Entity\Product;
-use App\Entity\Calendar;
-use App\Entity\OptionCost;
+use App\Entity\Location;
+use App\DataFixtures\UserFixtures;
+use App\DataFixtures\ContactFixtures;
+use App\DataFixtures\LocationFixtures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -24,15 +25,14 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
+      
         
         
-        $otptionsCosts = $manager->getRepository(OptionCost::class)->findAll();
-        $calendars = $manager->getRepository(Calendar::class)->findAll();
-        $productOwners=$manager->getRepository(User::class)->findAll('OWNER');
-        dd($productOwners);
+        $productOwners=$manager->getRepository(User::class)->findBy(['ROLE_OWNER']);  
         $contacts = $manager->getRepository(Contact::class)->findAll();
-        
+        $locations=$manager->getRepository(Location::class)->findAll();
         for ($i=1; $i<30; $i++){
+            dd($productOwners);
             $product= new Product();
             $product->setTitle($faker->words(3, true));
             $product->setDescription($faker->paragraph(1,true));
@@ -45,8 +45,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setAnimal($faker->boolean());
             $product->setSmoker($faker->boolean());
             $product->setAnimalCost($faker->randomFloat(2,0,100));
-            $product->addCalendar($faker->randomElement($calendars));      
-            $product->addOptionCost($faker->randomElement($otptionsCosts));
+            $product->setLocation($faker->randomElement($locations));
             $product->setContact($faker->randomElement($contacts));
             $product->setProductOwner($faker->randomElement($productOwners));
             $product->setSlug(strtolower($this->slugger->slug($product->getTitle())));
@@ -56,11 +55,11 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     $manager->flush();
     }
     public function getDependencies(): array
-    {
-        return [OptionFixtures::class];
-        return [OptionCostFixtures::class];
-        return [ContactFixtures::class];
-        return [CalendarFixtures::class];
+    {   
+        return [LocationFixtures::class];
         return [UserFixtures::class];
+        return [ContactFixtures::class];
+     
+        
     }
 }

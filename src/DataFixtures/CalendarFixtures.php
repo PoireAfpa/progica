@@ -2,8 +2,11 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Calendar;
 use Faker\Factory;
+use DateTimeImmutable;
+use App\Entity\Product;
+use App\Entity\Calendar;
+use App\DataFixtures\ProductFixtures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -15,11 +18,11 @@ class CalendarFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create('fr_FR');
         $products = $manager->getRepository(Product::class)->findAll();
        
-        foreach($products as $product){
+        for($i=1;$i<30;$i++){
             $calendar= new Calendar();
-            $calendar->setDateStart(\DateTimeImmutable::createFromMutable($faker()->datetime()));
-            $calendar->setDateEnd(\DateTimeImmutable::createFromMutable($faker()->datetime()));
-            $calendar->setProduct($product);
+            $calendar->setDateStart(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth('+1 week')));
+            $calendar->setDateEnd(DateTimeImmutable::createFromMutable($faker->datetimeThisMonth('+6 months')));
+            $calendar->setProduct($faker->randomElement($products));
             $manager->persist($calendar);
 
         }

@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Option;
-use App\Entity\OptionCost;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -115,7 +114,6 @@ class OptionFixtures extends Fixture
         array_push($services, $service1, $service2,$service3,$service4);
 
         $manager->flush();
-
     
     
 
