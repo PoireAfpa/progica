@@ -1,4 +1,4 @@
-  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+  <nav class="navbar navbar-default navbar-trans navbar-expand-lg sticky-top">
     <div class="container">
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
@@ -18,7 +18,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link{% if current_menu is defined and current_menu == 'products' %}active{% endif %}" href="{{ path('app_product_index') }}">Gîtes</a>
+            <a class="nav-link {% if current_menu is defined and current_menu == 'products' %}active{% endif %}" href="{{ path('app_product_index') }}">Gîtes</a>
           </li>
 
           <li class="nav-item">
