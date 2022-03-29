@@ -68,7 +68,7 @@ class Cities
      *
      * @ORM\ManyToOne(targetEntity="Departments")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="department_code", referencedColumnName="code")
+     * @ORM\JoinColumn(name="department_code", referencedColumnName="code")
      * })
      */
     private $departmentCode;

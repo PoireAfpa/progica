@@ -25,7 +25,7 @@ class ProductType extends AbstractType
             ->add('animalCost')
             ->add('slug')
             ->add('productOwner')
-            ->add('options')
+            ->add('option')
             ->add('productContact')
         ;
     }
