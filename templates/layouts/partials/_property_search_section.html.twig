@@ -1,0 +1,107 @@
+  <div class="click-closed"></div>
+  <!--/ Form Search Star /-->
+  <div class="box-collapse">
+    <div class="title-box-d">
+      <h3 class="title-d">Trouver un gîte</h3>
+    </div>
+    <span class="close-box-collapse right-boxed bi bi-x"></span>
+    <div class="box-collapse-wrap form">
+      <form class="form-a">
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <div class="form-group">
+              <label class="pb-2" for="Type">Mot clé</label>
+              <input type="text" class="form-control form-control-lg form-control-a" placeholder="Entrer un mot clé">
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="Type">Type</label>
+              <select class="form-control form-select form-control-a" id="Type">
+                <option>Non précisé</option>
+                <option>For Rent</option>
+                <option>For Sale</option>
+                <option>Open House</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" 
+              <label class="pb-2" for="city">Ville</label>
+              <select class="form-control form-select form-control-a" id="city">
+              <ul class="dropdown-menu> 
+                {% for citie in cities %}
+                <li><a href="#">{{ cities.name }}</a></li>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="city">Ville</label>
+              <select class="form-control form-select form-control-a" id="city">
+                <option>Non précisé</option>
+                <option>Nice</option>
+                <option>Chatou</option>
+                <option>Montpellier</option>
+                <option>Chamonix</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="bedrooms">Nombre de chambres</label>
+              <select class="form-control form-select form-control-a" id="bedrooms">
+                <option>Non précisé</option>
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="garages">Nombre de personnes</label>
+              <select class="form-control form-select form-control-a" id="garages">
+                <option>Non précisé</option>
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+                <option>04</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="bathrooms">Surface minimale</label>
+              <select class="form-control form-select form-control-a" id="bathrooms">
+                <option>Non précisé</option>
+                <option>100m2</option>
+                <option>250m2</option>
+                <option>500m2</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="price">Prix maximum</label>
+              <select class="form-control form-select form-control-a" id="price">
+                <option>Non précisé</option>
+                <option>€1,000</option>
+                <option>€2,000</option>
+                <option>€3,000</option>
+                <option>€5,000</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-b">Chercher</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

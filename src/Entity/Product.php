@@ -65,7 +65,7 @@ class Product
     private $animal;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $smoker;
 
