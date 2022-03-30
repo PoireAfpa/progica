@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProductController extends AbstractController
 {
@@ -48,12 +49,13 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
+    public function edit(Request $request, Product $product, ProductRepository $productRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $product-> setSlug(strtolower($slugger->slug($product->getTitle())));
             $productRepository->add($product);
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
