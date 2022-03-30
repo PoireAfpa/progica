@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
+
 use App\Entity\User;
 use App\Entity\Contact;
 use App\Entity\Product;
@@ -10,6 +11,7 @@ use App\Entity\Location;
 use App\DataFixtures\UserFixtures;
 use App\DataFixtures\ContactFixtures;
 use App\DataFixtures\LocationFixtures;
+
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -28,7 +30,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
       
         
         
-        $productOwners=$manager->getRepository(User::class)->findAll(['ROLE_OWNER']);  
+        $productOwners=$manager->getRepository(User::class)->findAllByRole();  
         $contacts = $manager->getRepository(Contact::class)->findAll();
         $locations=$manager->getRepository(Location::class)->findAll();
         for ($i=1; $i<30; $i++){

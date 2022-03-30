@@ -24,11 +24,11 @@
                 <td>{{ contact.lastName }}</td>
                 <td>{{ contact.firstName }}</td>
                 <td>{{ contact.email }}</td>
-                <td>{{ contact.message }}</td>
-             
+                 <td>{{ contact.message }}</td>
+                 <td>{{ contact.availabilities }}</td>
                 <td>
-                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
+                    <a class="btn btn-secondary" href="{{ path('app_contact_show', {'id': contact.id}) }}">show</a>
+                    <a class="btn btn-secondary" href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
