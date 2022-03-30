@@ -15,7 +15,6 @@ class OptionType extends AbstractType
             ->add('name')
             ->add('type')
             ->add('slug')
-            ->add('productOption')
         ;
     }
 

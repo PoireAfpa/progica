@@ -15,7 +15,6 @@ class AvailabilityContactType extends AbstractType
             ->add('day')
             ->add('hourStart')
             ->add('hourEnd')
-            ->add('availability')
         ;
     }
 
