@@ -20,7 +20,7 @@
             {% endif %}
             <div class="card-body">
               <h3 class="card-title">{{ product.title }}</h3>
-              <p class="card-text">{{ product.city }}</p>
+              <p class="card-text">{{ product.people}}</p>
               <p class="card-text">Surface : {{ product.surface }} m²</p>
               <p class="card-text">{{ product.description }}</p>
               <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-secondary">Découvrir le gîte</a>

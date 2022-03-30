@@ -24,9 +24,9 @@ class ProductType extends AbstractType
             ->add('smoker')
             ->add('animalCost')
             ->add('slug')
-            ->add('productOwner')
-            ->add('option')
-            ->add('productContact')
+            //->add('productOwner')
+            //->add('option')
+            //->add('productContact')
         ;
     }
 
