@@ -16,9 +16,11 @@ class ProductController extends AbstractController
     #[Route('/product', name: 'app_product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
+        $products = $productRepository->findAll();
+
         return $this->render('product/index.html.twig', [
+            'products' => $products,
             'current_menu' => 'products',
-            'products' => $productRepository->findAll(),
         ]);
     }
 
@@ -29,7 +31,7 @@ class ProductController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {  
             $product-> setSlug(strtolower($slugger->slug($product->getTitle())))
                     ->setProductOwner($this->getUser());
             $productRepository->add($product);
