@@ -30,7 +30,7 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $product-> setSlug(strtolower($slugger->slug($product->getTitle())))
+            $product->setSlug(strtolower($slugger->slug($product->getTitle())))
                     ->setProductOwner($this->getUser());
             $productRepository->add($product);
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
