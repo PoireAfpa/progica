@@ -96,12 +96,6 @@ class Product
     private $calendars;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="product")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $location;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Contact::class, inversedBy="product")
      * @ORM\JoinColumn(nullable=false)
      */
