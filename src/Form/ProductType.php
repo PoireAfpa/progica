@@ -27,28 +27,48 @@ class ProductType extends AbstractType
                 'label' => 'Photo'
             ])
             ->add('peakSeasonPrice', NumberType::class, [
-                'label' => 'Prix haute saison'
+                'label' => 'Prix haute saison',
+                'attr' => [
+                    'min' => 0
+                  ]
             ])
             ->add('offSeasonPrice', NumberType::class, [
-                'label' => 'Prix basse saison'
+                'label' => 'Prix basse saison',
+                'attr' => [
+                    'min' => 0
+                  ]
             ])
             ->add('surface', NumberType::class, [
-                'label' => 'Surface du gîte'
+                'label' => 'Surface du gîte',
+                'attr' => [
+                    'min' => 0
+                  ]
             ])
             ->add('room', IntegerType::class, [
-                'label' => 'Nombre de pièces'
+                'label' => 'Nombre de pièces',
+                'attr' => [
+                    'min' => 1
+                  ]
             ])
             ->add('people', IntegerType::class, [
-                'label' => 'Nombre de couchage'
+                'label' => 'Nombre de couchage',
+                'attr' => [
+                    'min' => 1
+                  ]
             ])
             ->add('animal', CheckboxType::class, [
                 'label' => 'Animaux autorisés (Cochez si oui)',
+                'required' => false
             ])
             ->add('smoker', CheckboxType::class, [
                 'label' => 'Gîte fumeur (Cochez si oui)',
+                'required' => false
             ])
             ->add('animalCost', NumberType::class, [
-                'label' => 'Supplément pour animaux'
+                'label' => 'Supplément pour animaux',
+                'attr' => [
+                    'min' => 0
+                  ]
             ])
             //->add('productOwner')
             //->add('option')
