@@ -7,11 +7,10 @@ use Faker\Factory;
 use App\Entity\User;
 use App\Entity\Contact;
 use App\Entity\Product;
-use App\Entity\Location;
 use App\DataFixtures\UserFixtures;
 use App\DataFixtures\ContactFixtures;
 use App\DataFixtures\LocationFixtures;
-
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -28,13 +27,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
       
-        
-        
-        $productOwners=$manager->getRepository(User::class)->findAllByRole();  
+        $productOwners=$manager->getRepository(User::class)->findAll();
         $contacts = $manager->getRepository(Contact::class)->findAll();
-        $locations=$manager->getRepository(Location::class)->findAll();
         for ($i=1; $i<30; $i++){
-            dd($productOwners);
             $product= new Product();
             $product->setTitle($faker->words(3, true));
             $product->setDescription($faker->paragraph(1,true));
@@ -47,7 +42,6 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setAnimal($faker->boolean());
             $product->setSmoker($faker->boolean());
             $product->setAnimalCost($faker->randomFloat(2,0,100));
-            $product->setLocation($faker->randomElement($locations));
             $product->setContact($faker->randomElement($contacts));
             $product->setProductOwner($faker->randomElement($productOwners));
             $product->setSlug(strtolower($this->slugger->slug($product->getTitle())));
