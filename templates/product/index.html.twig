@@ -1,16 +1,13 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Progica - Nos Gîtes{% endblock title %}
-
 {% block body %}
     <main id="main">
       {# Intro Single #}
       {{ include('product/partials/_intro_single.html.twig') }}
 
- 
-
     <section class="d-flex justify-content-center">
       <article class="row">
+        {# Properties Grid #}
         {% for product in products %}
           <div class="card m-4" style="width: 18rem;">
             {% if product.image %}
