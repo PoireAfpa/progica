@@ -70,9 +70,10 @@ class ProductType extends AbstractType
                     'min' => 0
                   ]
             ])
-            //->add('productOwner')
-            //->add('option')
-            //->add('productContact')
+            ->add('productOwner')
+            ->add('option')
+            ->add('optionCost')
+            ->add('productContact')
         ;
     }
 

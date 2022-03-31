@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
     <main id="main">
@@ -18,9 +18,14 @@
                     <p class="card-text">{{ product.description }}</p>
                     <p class="card-text">Prix haute saison : {{ product.peakSeasonPrice }} euros par semaine</p>
                     <p class="card-text">Prix basse saison : {{ product.offSeasonPrice }} euros par semaine</p>
-                    {% if product.animal == true %}
-                        <p class="card-text">Supplément animaux : {{ product.animalCost }} euros</td>
-                    {% endif %}
+                        {% if product.smoker == true %}
+                        <i class="fa-solid fa-smoking"></i>
+                        {% else %}
+                        <i class="fa-solid fa-ban-smoking"></i>
+                        {% endif %}
+                        {% if product.animal == true %}
+                            <p class="card-text">Supplément animaux : {{ product.animalCost }} euros/semaine</td>
+                        {% endif %}
                     </div>
                 </div>
                 <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Retour</a>

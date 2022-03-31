@@ -104,6 +104,9 @@
     "fakerphp/faker": {
         "version": "v1.19.0"
     },
+    "fortawesome/font-awesome": {
+        "version": "6.1.1"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },

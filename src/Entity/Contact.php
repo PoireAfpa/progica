@@ -148,9 +148,13 @@ class Contact
 
         return $this;
     }
-    public function __toString()
+    /*public function __toString()
     {
         return $this->availabilities;
+    }*/
+    public function __toString()
+    {
+        return $this->firstName ." ". $this->lastName;
     }
 
 }
