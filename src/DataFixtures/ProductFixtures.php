@@ -52,7 +52,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     }
     public function getDependencies(): array
     {   
-        return [LocationFixtures::class];
+        
         return [UserFixtures::class];
         return [ContactFixtures::class];
      
