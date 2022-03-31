@@ -328,18 +328,6 @@ class Product
         return $this;
     }
 
-    public function getLocation(): ?Location
-    {
-        return $this->location;
-    }
-
-    public function setLocation(?Location $location): self
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
     public function getContact(): ?Contact
     {
         return $this->contact;
