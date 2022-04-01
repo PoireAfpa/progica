@@ -2,35 +2,49 @@
 
 namespace App\Entity;
 
-use App\Repository\OptionCostRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=OptionCostRepository::class)
+ * OptionCost
+ *
+ * @ORM\Table(name="option_cost", indexes={@ORM\Index(name="IDX_F0283E1FA7C41D6F", columns={"option_id"}), @ORM\Index(name="IDX_F0283E1F4584665A", columns={"product_id"})})
+ * @ORM\Entity
  */
 class OptionCost
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="float")
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float", precision=10, scale=0, nullable=false)
      */
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="optionCosts")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \Product
+     *
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     * })
      */
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Option::class, inversedBy="optionCosts")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \Option
+     *
+     * @ORM\ManyToOne(targetEntity="Option")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="option_id", referencedColumnName="id")
+     * })
      */
     private $option;
 
@@ -74,4 +88,6 @@ class OptionCost
 
         return $this;
     }
+
+
 }

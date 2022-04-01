@@ -108,5 +108,12 @@ class Departments
         return $this;
     }
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
 
 }

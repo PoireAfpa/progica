@@ -2,34 +2,46 @@
 
 namespace App\Entity;
 
-use App\Repository\CalendarRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CalendarRepository::class)
+ * Calendar
+ *
+ * @ORM\Table(name="calendar", indexes={@ORM\Index(name="IDX_6EA9A1464584665A", columns={"product_id"})})
+ * @ORM\Entity
  */
 class Calendar
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @var datetime_immutable
+     *
+     * @ORM\Column(name="date_start", type="datetime_immutable", nullable=false)
      */
     private $dateStart;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @var datetime_immutable
+     *
+     * @ORM\Column(name="date_end", type="datetime_immutable", nullable=false)
      */
     private $dateEnd;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="calendars")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \Product
+     *
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     * })
      */
     private $product;
 
@@ -73,4 +85,6 @@ class Calendar
 
         return $this;
     }
+
+
 }

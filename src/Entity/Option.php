@@ -2,48 +2,45 @@
 
 namespace App\Entity;
 
-use App\Repository\OptionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=OptionRepository::class)
- * @ORM\Table(name="`option`")
+ * Option
+ *
+ * @ORM\Table(name="option")
+ * @ORM\Entity
  */
 class Option
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
     private $slug;
-
-    /**
-     * @ORM\OneToMany(targetEntity=OptionCost::class, mappedBy="option", orphanRemoval=true)
-     */
-    private $optionCosts;
-
-    public function __construct()
-    {
-        $this->optionCosts = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -86,33 +83,5 @@ class Option
         return $this;
     }
 
-    /**
-     * @return Collection<int, OptionCost>
-     */
-    public function getOptionCosts(): Collection
-    {
-        return $this->optionCosts;
-    }
 
-    public function addOptionCost(OptionCost $optionCost): self
-    {
-        if (!$this->optionCosts->contains($optionCost)) {
-            $this->optionCosts[] = $optionCost;
-            $optionCost->setOption($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOptionCost(OptionCost $optionCost): self
-    {
-        if ($this->optionCosts->removeElement($optionCost)) {
-            // set the owning side to null (unless already changed)
-            if ($optionCost->getOption() === $this) {
-                $optionCost->setOption(null);
-            }
-        }
-
-        return $this;
-    }
 }
