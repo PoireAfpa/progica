@@ -2,55 +2,41 @@
 
 namespace App\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * AvailabilityContact
- *
- * @ORM\Table(name="availability_contact", indexes={@ORM\Index(name="IDX_C3760D93E7A1254A", columns={"contact_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=AvailabilityContactRepository::class)
  */
 class AvailabilityContact
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="day", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $day;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="hour_start", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $hourStart;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="hour_end", type="string", length=255, nullable=false)
-     */
-    private $hourEnd;
-
-    /**
-     * @var \Contact
-     *
-     * @ORM\ManyToOne(targetEntity="Contact")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="contact_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=Contact::class, inversedBy="availabilities")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $contact;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $hourEnd;
 
     public function getId(): ?int
     {
@@ -81,18 +67,6 @@ class AvailabilityContact
         return $this;
     }
 
-    public function getHourEnd(): ?string
-    {
-        return $this->hourEnd;
-    }
-
-    public function setHourEnd(string $hourEnd): self
-    {
-        $this->hourEnd = $hourEnd;
-
-        return $this;
-    }
-
     public function getContact(): ?Contact
     {
         return $this->contact;
@@ -105,5 +79,15 @@ class AvailabilityContact
         return $this;
     }
 
+    public function getHourEnd(): ?string
+    {
+        return $this->hourEnd;
+    }
 
+    public function setHourEnd(string $hourEnd): self
+    {
+        $this->hourEnd = $hourEnd;
+
+        return $this;
+    }
 }

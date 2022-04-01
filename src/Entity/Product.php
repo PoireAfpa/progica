@@ -2,128 +2,110 @@
 
 namespace App\Entity;
 
+use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Product
- *
- * @ORM\Table(name="product", indexes={@ORM\Index(name="IDX_D34A04ADE7A1254A", columns={"contact_id"}), @ORM\Index(name="IDX_D34A04ADB58C0B6E", columns={"product_owner_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", length=0, nullable=false)
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="peak_season_price", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float")
      */
     private $peakSeasonPrice;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="off_season_price", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float")
      */
     private $offSeasonPrice;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="surface", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $surface;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="room", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $room;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="people", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $people;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="animal", type="boolean", nullable=false)
+     * @ORM\Column(type="boolean")
      */
     private $animal;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="smoker", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $smoker;
 
     /**
-     * @var float|null
-     *
-     * @ORM\Column(name="animal_cost", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $animalCost;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
     /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="product_owner_id", referencedColumnName="id")
-     * })
+     * @ORM\OneToMany(targetEntity=OptionCost::class, mappedBy="product", orphanRemoval=true)
+     */
+    private $optionCosts;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $productOwner;
 
     /**
-     * @var \Contact
-     *
-     * @ORM\ManyToOne(targetEntity="Contact")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="contact_id", referencedColumnName="id")
-     * })
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="product", orphanRemoval=true)
+     */
+    private $calendars;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Contact::class, inversedBy="product")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $contact;
+
+    public function __construct()
+    {
+        $this->optionCosts = new ArrayCollection();
+        $this->calendars = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -243,7 +225,7 @@ class Product
         return $this->smoker;
     }
 
-    public function setSmoker(?bool $smoker): self
+    public function setSmoker(bool $smoker): self
     {
         $this->smoker = $smoker;
 
@@ -274,6 +256,36 @@ class Product
         return $this;
     }
 
+    /**
+     * @return Collection<int, OptionCost>
+     */
+    public function getOptionCosts(): Collection
+    {
+        return $this->optionCosts;
+    }
+
+    public function addOptionCost(OptionCost $optionCost): self
+    {
+        if (!$this->optionCosts->contains($optionCost)) {
+            $this->optionCosts[] = $optionCost;
+            $optionCost->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOptionCost(OptionCost $optionCost): self
+    {
+        if ($this->optionCosts->removeElement($optionCost)) {
+            // set the owning side to null (unless already changed)
+            if ($optionCost->getProduct() === $this) {
+                $optionCost->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getProductOwner(): ?User
     {
         return $this->productOwner;
@@ -282,6 +294,36 @@ class Product
     public function setProductOwner(?User $productOwner): self
     {
         $this->productOwner = $productOwner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Calendar>
+     */
+    public function getCalendars(): Collection
+    {
+        return $this->calendars;
+    }
+
+    public function addCalendar(Calendar $calendar): self
+    {
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): self
+    {
+        if ($this->calendars->removeElement($calendar)) {
+            // set the owning side to null (unless already changed)
+            if ($calendar->getProduct() === $this) {
+                $calendar->setProduct(null);
+            }
+        }
 
         return $this;
     }
@@ -297,6 +339,4 @@ class Product
 
         return $this;
     }
-
-
 }

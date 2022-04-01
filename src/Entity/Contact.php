@@ -2,59 +2,57 @@
 
 namespace App\Entity;
 
+use App\Repository\ContactRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Contact
- *
- * @ORM\Table(name="contact")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ContactRepository::class)
  */
 class Contact
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $lastName;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $firstName;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="message", type="text", length=0, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $message;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AvailabilityContact::class, mappedBy="contact", orphanRemoval=true)
+     */
+    private $availabilities;
+
+    public function __construct()
+    {
+        $this->availabilities = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,5 +119,42 @@ class Contact
         return $this;
     }
 
+    /**
+     * @return Collection<int, AvailabilityContact>
+     */
+    public function getAvailabilities(): Collection
+    {
+        return $this->availabilities;
+    }
+
+    public function addAvailability(AvailabilityContact $availability): self
+    {
+        if (!$this->availabilities->contains($availability)) {
+            $this->availabilities[] = $availability;
+            $availability->setContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvailability(AvailabilityContact $availability): self
+    {
+        if ($this->availabilities->removeElement($availability)) {
+            // set the owning side to null (unless already changed)
+            if ($availability->getContact() === $this) {
+                $availability->setContact(null);
+            }
+        }
+
+        return $this;
+    }
+    /*public function __toString()
+    {
+        return $this->availabilities;
+    }*/
+    public function __toString()
+    {
+        return $this->firstName ." ". $this->lastName;
+    }
 
 }
