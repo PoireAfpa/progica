@@ -43,8 +43,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setRoom($faker->numberBetween(2,5));
             $product->setPeople($faker->numberBetween(1,5));
             $product->setAnimal($faker->boolean());
-            $product->setCities($faker->randomInt(1,1000));
-            $product->addOptionCost($faker->randomElement($optionCosts));
+            $product->setCities($faker->randomElement($cities));
+            $product->getOptionCosts($faker->randomElement($optionCosts));
             $product->setSmoker($faker->boolean());
             $product->setAnimalCost($faker->randomFloat(2,0,100));
             $product->setContact($faker->randomElement($contacts));
