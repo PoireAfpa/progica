@@ -5,13 +5,14 @@ namespace App\DataFixtures;
 use Faker\Factory;
 
 use App\Entity\User;
+use App\Entity\Cities;
 use App\Entity\Contact;
 use App\Entity\Product;
+use App\Entity\OptionCost;
 use App\DataFixtures\UserFixtures;
 use App\DataFixtures\ContactFixtures;
-use App\DataFixtures\LocationFixtures;
-use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectManager;
+use App\DataFixtures\OptionCostFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -28,6 +29,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create('fr_FR');
       
         $productOwners=$manager->getRepository(User::class)->findAll();
+        $cities=$manager->getRepository(Cities::class)->findAll();
+        $optionCosts=$manager->getRepository(OptionCost::class)->findAll();
         $contacts = $manager->getRepository(Contact::class)->findAll();
         for ($i=1; $i<30; $i++){
             $product= new Product();
@@ -40,6 +43,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setRoom($faker->numberBetween(2,5));
             $product->setPeople($faker->numberBetween(1,5));
             $product->setAnimal($faker->boolean());
+            $product->setCities($faker->randomInt(1,1000));
+            $product->addOptionCost($faker->randomElement($optionCosts));
             $product->setSmoker($faker->boolean());
             $product->setAnimalCost($faker->randomFloat(2,0,100));
             $product->setContact($faker->randomElement($contacts));
@@ -52,7 +57,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     }
     public function getDependencies(): array
     {   
-        
+       
+        return [OptionCostFixtures::class];
         return [UserFixtures::class];
         return [ContactFixtures::class];
      

@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use Faker\Factory;
+
 use App\Entity\Option;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -18,7 +18,7 @@ class OptionFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
+       
         
       
       
