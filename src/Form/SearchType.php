@@ -2,73 +2,74 @@
 
 namespace App\Form;
 
-use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
+use App\Repository\CitiesRepository;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductType extends AbstractType
+class SearchType extends AbstractType
 {
+    private $citiesArray=[];
+
+    public function __construct(CitiesRepository $citiesRepository)
+    {
+        $cities = $citiesRepository->findAll();
+        foreach($cities as $city){
+            $this->citiesArray[$city->getName()]=$city->getId();
+        }
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, [
-                'label' => 'Nom du gîte'
+            ->add('keyword', TextType::class, [
+                'label' => 'Mot clé',
+                'required' => false
             ])
-            ->add('description', TextareaType::class, [
-                'label' => 'Description'
+            ->add('cities', ChoiceType::class, [
+                'choices' => $this->citiesArray,
+                'required' => false
             ])
-            ->add('image', TextType::class, [
-                'label' => 'Photo'
-            ])
-            ->add('peakSeasonPrice', NumberType::class, [
-                'label' => 'Prix haute saison',
-                'attr' => [
-                    'min' => 0
-                  ]
-            ])
-            ->add('offSeasonPrice', NumberType::class, [
-                'label' => 'Prix basse saison',
+            ->add('price', NumberType::class, [
+                'label' => 'Prix',
+                'required' => false,
                 'attr' => [
                     'min' => 0
                   ]
             ])
             ->add('surface', NumberType::class, [
                 'label' => 'Surface du gîte',
+                'required' => false,
                 'attr' => [
                     'min' => 0
                   ]
             ])
             ->add('room', IntegerType::class, [
                 'label' => 'Nombre de pièces',
+                'required' => false,
                 'attr' => [
                     'min' => 1
                   ]
             ])
             ->add('people', IntegerType::class, [
                 'label' => 'Nombre de couchage',
+                'required' => false,
                 'attr' => [
                     'min' => 1
                   ]
             ])
             ->add('animal', CheckboxType::class, [
-                'label' => 'Animaux autorisés (Cochez si oui)',
+                'label' => 'Animaux (Cochez si oui)',
                 'required' => false
             ])
             ->add('smoker', CheckboxType::class, [
-                'label' => 'Gîte fumeur (Cochez si oui)',
+                'label' => 'Fumeur (Cochez si oui)',
                 'required' => false
-            ])
-            ->add('animalCost', NumberType::class, [
-                'label' => 'Supplément pour animaux',
-                'attr' => [
-                    'min' => 0
-                  ]
             ])
         ;
     }
@@ -76,7 +77,8 @@ class ProductType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Product::class,
+
         ]);
     }
+
 }

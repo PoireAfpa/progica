@@ -6,89 +6,74 @@
     </div>
     <span class="close-box-collapse right-boxed bi bi-x"></span>
     <div class="box-collapse-wrap form">
+
+      {{ form_start(form) }}
       <form class="form-a">
         <div class="row">
+
           <div class="col-md-12 mb-2">
             <div class="form-group">
               <label class="pb-2" for="Type">Mot clé</label>
-              <input type="text" class="form-control form-control-lg form-control-a" placeholder="Entrer un mot clé">
+                {{ form_widget(form.keyword) }}
             </div>
           </div>
-          <div class="col-md-6 mb-2">
+
+          <div class="col-md-12 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="Type">Type</label>
-              <select class="form-control form-select form-control-a" id="Type">
-                <option>Non précisé</option>
-                <option>For Rent</option>
-                <option>For Sale</option>
-                <option>Open House</option>
-              </select>
+              <label class="pb-2" for="cities">Ville</label>
+              {{ form_widget(form.cities) }}
             </div>
           </div>
 
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="city">Ville</label>
-              <select class="form-control form-select form-control-a" id="city">
-                <option>Non précisé</option>
-                <option>Nice</option>
-                <option>Chatou</option>
-                <option>Montpellier</option>
-                <option>Chamonix</option>
-              </select>
+              <label class="pb-2" for="price">Prix EUR (hebdomadaire)</label>
+              {{ form_widget(form.price) }}
             </div>
           </div>
 
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="bedrooms">Nombre de chambres</label>
-              <select class="form-control form-select form-control-a" id="bedrooms">
-                <option>Non précisé</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
+              <label class="pb-2" for="surface">Superficie</label>
+              {{ form_widget(form.surface) }}
             </div>
           </div>
+
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="garages">Nombre de personnes</label>
-              <select class="form-control form-select form-control-a" id="garages">
-                <option>Non précisé</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-              </select>
+              <label class="pb-2" for="people">Nombre de personnes</label>
+              {{ form_widget(form.people) }}
             </div>
           </div>
+
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="bathrooms">Surface minimale</label>
-              <select class="form-control form-select form-control-a" id="bathrooms">
-                <option>Non précisé</option>
-                <option>100m2</option>
-                <option>250m2</option>
-                <option>500m2</option>
-              </select>
+              <label class="pb-2" for="room">Nombre de chambres</label>
+              {{ form_widget(form.room) }}
             </div>
           </div>
+
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="price">Prix maximum</label>
-              <select class="form-control form-select form-control-a" id="price">
-                <option>Non précisé</option>
-                <option>€1,000</option>
-                <option>€2,000</option>
-                <option>€3,000</option>
-                <option>€5,000</option>
-              </select>
+              <label class="pb-2" for="smoker"></label>
+              {{ form_widget(form.smoker) }}
             </div>
           </div>
+
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="animal"></label>
+              {{ form_widget(form.animal) }}
+            </div>
+          </div>
+
           <div class="col-md-12">
             <button type="submit" class="btn btn-b">Chercher</button>
           </div>
+          
         </div>
       </form>
+      {{ form_end(form) }}
+      
     </div>
   </div>

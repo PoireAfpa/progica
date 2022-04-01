@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+
+    <main id="main">
+    {# Intro Single #}
+     {{ include('product/partials/_intro_single.html.twig') }}
+
+    <section class="d-flex justify-content-center">
+      <article class="row">
+        {# Products Search Grid #}
+        {% for result in results %}
+            <div class="card m-4" style="width: 18rem;">
+                <img src="{{ product.image }}" class="card-img-top" alt="..." style="width:100%; height:300px;">
+                <div class="card-body">
+                    <h3 class="card-title">{{ product.title }}</h3>
+                    <p class="card-text">{{ product.people}} personnes</p>
+                    <p class="card-text">Surface : {{ product.surface }} m²</p>
+                    <p class="card-text">{{ product.description }}</p>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-secondary">Découvrir le gîte</a>
+                </div>
+            </div>
+        {% else %}
+            <em>Aucun résultat</em>
+        {% endfor %}
+      </article>
+    </section>
+    
+    </main>
+{% endblock %}
