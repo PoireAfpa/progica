@@ -20,16 +20,16 @@
                     <p class="card-text">Prix haute saison : {{ product.peakSeasonPrice }} euros par semaine</p>
                     <p class="card-text">Prix basse saison : {{ product.offSeasonPrice }} euros par semaine</p>
                         {% if product.smoker == true %}
-                        <i class="fa-solid fa-smoking"></i>
+                        <i class="fa-solid fa-smoking mb-2" style="font-size:50px;"></i>
                         {% else %}
-                        <i class="fa-solid fa-ban-smoking"></i>
+                        <i class="fa-solid fa-ban-smoking mb-2" style="font-size:50px;"></i>
                         {% endif %}
                         {% if product.animal == true %}
                             <p class="card-text">Supplément animaux : {{ product.animalCost }} euros/semaine</td>
                         {% endif %}
                     </div>
                 </div>
-                <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Retour</a>
+                <a href="{{ path('app_product_index') }}" class="btn btn-success">Retour</a>
             </article>
         </section>
 
