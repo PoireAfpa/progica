@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,13 +18,14 @@ class Cities
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned"=true})
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string|null
-     * @ORM\Id
+     *
      * @ORM\Column(name="insee_code", type="string", length=5, nullable=true)
      */
     private $inseeCode;
@@ -71,6 +74,16 @@ class Cities
      * })
      */
     private $departmentCode;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="cities", orphanRemoval=true)
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -165,5 +178,35 @@ class Cities
     {
         return $this->name;
     }
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setCities($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getCities() === $this) {
+                $product->setCities(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }
