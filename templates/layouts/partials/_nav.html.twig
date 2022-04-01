@@ -24,21 +24,29 @@
          <!-- <li class="nav-item">
             <a class="nav-link" href="{{ path('app_contact_index') }}">Proprietaire</a>
           </li>-->
-
+          {% if is_granted('ROLE_USER')%}
            <li class="nav-item">
             <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
           </li>
+          {% else %}
 
           <li class="nav-item">
             <a class="nav-link" href="{{ path('app_login') }}">Login</a>
           </li>
-
+          {% endif %}
+          
           <li class="nav-item">
             <a class="nav-link" href="{{ path('app_register') }}">Nouveau compte</a>
           </li>
-        </ul>
+        
+    
+      {% if is_granted('ROLE_ADMIN')%}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin') }}">Admin</a>
+          </li>
+      {% endif %}
+          </ul>
       </div>
-
       <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
         <i class="bi bi-search"></i>
       </button>
