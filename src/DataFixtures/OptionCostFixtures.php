@@ -8,11 +8,12 @@ use App\Entity\Product;
 use App\Entity\OptionCost;
 use App\DataFixtures\OptionFixtures;
 use App\DataFixtures\ProductFixtures;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class OptionCostFixtures extends Fixture implements DependentFixtureInterface
+class OptionCostFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -48,5 +49,10 @@ class OptionCostFixtures extends Fixture implements DependentFixtureInterface
     {
         return [OptionFixtures::class];
         return [ProductFixtures::class];
+    }
+
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
 }

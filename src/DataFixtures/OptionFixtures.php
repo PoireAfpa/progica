@@ -7,9 +7,10 @@ use App\Entity\Option;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
 
-class OptionFixtures extends Fixture 
+class OptionFixtures extends Fixture implements FixtureGroupInterface
 {
     protected $slugger;
     public function __construct(SluggerInterface $slugger)
@@ -117,6 +118,10 @@ class OptionFixtures extends Fixture
     
     
 
+    }
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
    
 }
