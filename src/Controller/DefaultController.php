@@ -28,7 +28,6 @@ class DefaultController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $result=[
                 $form->get('keyword')->getData(),
-                $form->get('cities')->getData(),
                 $form->get('price')->getData(),
                 $form->get('surface')->getData(),
                 $form->get('room')->getData(),
@@ -36,7 +35,7 @@ class DefaultController extends AbstractController
                 $form->get('animal')->getData(),
                 $form->get('smoker')->getData()
             ];
-            return $this->render('default/search.html.twig', [
+            return $this->render('search/product.html.twig', [
                 'result' => $result,
             ]);
         }

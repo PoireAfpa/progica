@@ -10,7 +10,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
 
-class OptionFixtures extends Fixture implements FixtureGroupInterface
+class OptionFixtures extends Fixture
 {
     protected $slugger;
     public function __construct(SluggerInterface $slugger)
@@ -119,9 +119,6 @@ class OptionFixtures extends Fixture implements FixtureGroupInterface
     
 
     }
-    public static function getGroups(): array
-    {
-        return ['group1'];
-    }
+
    
 }

@@ -18,17 +18,15 @@
             </div>
           </div>
 
-          <div class="col-md-12 mb-2">
-            <div class="form-group mt-3">
-              <label class="pb-2" for="cities">Ville</label>
-              {{ form_widget(form.cities) }}
-            </div>
-          </div>
-
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
               <label class="pb-2" for="price">Prix EUR (hebdomadaire)</label>
               {{ form_widget(form.price) }}
+              {{ form_widget(form.price.vars) }}
+           
+              
+           
+           
             </div>
           </div>
 

@@ -79,6 +79,11 @@ class Product
      */
     private $slug;
 
+     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cities;
+
     /**
      * @ORM\OneToMany(targetEntity=OptionCost::class, mappedBy="product", orphanRemoval=true)
      */
@@ -101,11 +106,7 @@ class Product
      */
     private $contact;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Cities::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $cities;
+ 
 
     public function __construct()
     {
@@ -346,17 +347,30 @@ class Product
         return $this;
     }
 
-    public function getCities(): ?Cities
+
+   
+
+    /**
+     * Get the value of cities
+     */ 
+    public function getCities()
     {
         return $this->cities;
     }
 
-    public function setCities(?Cities $cities): self
+    /**
+     * Set the value of cities
+     *
+     * @return  self
+     */ 
+    public function setCities($cities)
     {
         $this->cities = $cities;
 
         return $this;
     }
-
-   
+    public function __toString()
+    {
+        return $this->cities;
+    }
 }

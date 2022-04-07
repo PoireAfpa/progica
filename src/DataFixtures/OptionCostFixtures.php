@@ -13,7 +13,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class OptionCostFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
+class OptionCostFixtures extends Fixture implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -45,11 +45,7 @@ class OptionCostFixtures extends Fixture implements DependentFixtureInterface, F
       $manager->flush();
          
     }
-    public function getDependencies(): array
-    {
-        return [OptionFixtures::class];
-        return [ProductFixtures::class];
-    }
+ 
 
     public static function getGroups(): array
     {
