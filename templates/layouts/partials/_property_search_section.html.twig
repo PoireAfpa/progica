@@ -50,15 +50,11 @@
             <div class="form-group mt-3">
               <label class="pb-2" for="smoker"></label>
               {{ form_widget(form.smoker) }}
+               {{ form_widget(form.pet) }}
+                {{ form_widget(form.options) }}
             </div>
           </div>
 
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
-              <label class="pb-2" for="animal"></label>
-              {{ form_widget(form.pet) }}
-            </div>
-          </div>
 
           <div class="col-md-12">
             <button type="submit" class="btn btn-b">Chercher</button>

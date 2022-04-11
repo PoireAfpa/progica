@@ -35,6 +35,11 @@ class Product
     private $image;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cities;
+
+    /**
      * @ORM\Column(type="float")
      */
     private $peakSeasonPrice;
@@ -342,4 +347,24 @@ class Product
         return $this;
     }
 
+
+    /**
+     * Get the value of cities
+     */ 
+    public function getCities()
+    {
+        return $this->cities;
+    }
+
+    /**
+     * Set the value of cities
+     *
+     * @return  self
+     */ 
+    public function setCities($cities)
+    {
+        $this->cities = $cities;
+
+        return $this;
+    }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Option;
 use App\Repository\CitiesRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
@@ -21,17 +23,23 @@ class SearchType extends AbstractType
                 'label' => 'Mot clé',
                 'required' => false
             ])
-            ->add('maxPrice', RangeType::class, [
-                'data_class' => null,
+
+            ->add('options', EntityType::class,[
+                'choice_label' => 'name',
+                'required' => false,
+                'class'=> Option::class,
+                'expanded'=>true,
+                'multiple'=>true,
+            ])
+
+            ->add('maxPrice', NumberType::class, [
                 'label' => 'Prix maximum',
                 'required' => false,
                 "error_bubbling" => true,
                 'attr' => [
-                    "class" => "slider",
-                    "type" => "range",
-                    "min" => 0,
-                    "max" => 2000
-                ]
+                    'min' => 0
+                  ]
+             
             ])
             ->add('minSurface', NumberType::class, [
                 'label' => 'Surface du gîte',
@@ -68,9 +76,15 @@ class SearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'App\Entity\Search',
-            'method' => 'get',
+            'method' => 'GET',
             'csrf_protection' => false
         ]);
     }
+
+    public function getBlockPrefix()
+    {
+        return "";
+    }
+
 
 }

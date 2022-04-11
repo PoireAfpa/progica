@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Search
 {
@@ -16,12 +17,13 @@ class Search
     private $minPeople;
     private $pet;
     private $smoker;
+    private $options;
 
     
     /**
      * Get the value of keyword
      */ 
-    public function getKeyword()
+    public function getKeyword():?string
     {
         return $this->keyword;
     }
@@ -31,7 +33,7 @@ class Search
      *
      * @return  self
      */ 
-    public function setKeyword($keyword)
+    public function setKeyword(string $keyword):self
     {
         $this->keyword = $keyword;
         return $this;
@@ -41,7 +43,7 @@ class Search
     /**
      * Get the value of maxPrice
      */ 
-    public function getMaxPrice()
+    public function getMaxPrice():?int
     {
         return $this->maxPrice;
     }
@@ -51,7 +53,7 @@ class Search
      *
      * @return  self
      */ 
-    public function setMaxPrice($maxPrice) 
+    public function setMaxPrice(int $maxPrice) :self
     {
         $this->maxPrice = $maxPrice;
 
@@ -61,7 +63,7 @@ class Search
     /**
      * Get the value of minSurface
      */ 
-    public function getMinSurface()
+    public function getMinSurface():?int
     {
         return $this->minSurface;
     }
@@ -71,7 +73,7 @@ class Search
      *
      * @return  self
      */ 
-    public function setMinSurface($minSurface)
+    public function setMinSurface(int $minSurface):self
     {
         $this->minSurface = $minSurface;
 
@@ -81,7 +83,7 @@ class Search
     /**
      * Get the value of minRoom
      */ 
-    public function getMinRoom()
+    public function getMinRoom():?int
     {
         return $this->minRoom;
     }
@@ -91,7 +93,7 @@ class Search
      *
      * @return  self
      */ 
-    public function setMinRoom($minRoom)
+    public function setMinRoom(int $minRoom):self
     {
         $this->minRoom = $minRoom;
         return $this;
@@ -100,7 +102,7 @@ class Search
         /**
      * Get the value of minPeople
      */ 
-    public function getMinPeople()
+    public function getMinPeople():?int
     {
         return $this->minPeople;
     }
@@ -110,7 +112,7 @@ class Search
      *
      * @return  self
      */ 
-    public function setMinPeople($minPeople)
+    public function setMinPeople(int $minPeople):self
     {
         $this->minPeople = $minPeople;
         return $this;
@@ -119,7 +121,7 @@ class Search
     /**
      * Get the value of pet
      */ 
-    public function getPet()
+    public function getPet():?Bool
     {
         return $this->pet;
     }
@@ -129,7 +131,7 @@ class Search
      *
      * @return  self
      */ 
-    public function setPet($pet)
+    public function setPet(bool $pet):self
     {
         $this->pet = $pet;
         return $this;
@@ -138,7 +140,7 @@ class Search
     /**
      * Get the value of smoker
      */ 
-    public function getSmoker()
+    public function getSmoker():?Bool
     {
         return $this->smoker;
     }
@@ -148,10 +150,30 @@ class Search
      *
      * @return  self
      */ 
-    public function setSmoker($smoker)
+    public function setSmoker(bool $smoker):self
     {
         $this->smoker = $smoker;
         return $this;
     }
 
+
+    /**
+     * Get the value of options
+     */ 
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Set the value of options
+     *
+     * @return  self
+     */ 
+    public function setOptions($options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
 }

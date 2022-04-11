@@ -57,8 +57,10 @@ class ProductRepository extends ServiceEntityRepository
     ;
     }
 
-    public function findAllSearch(Search $search): array{
-        $query = $this->createQueryBuilder('q');
+    public function findAllSearch(): array{
+
+        return $this->findAll();
+       /* $query = $this->createQueryBuilder('q');
         if($search->getKeyword()){
             $query = $query
                         ->andWhere('q.keyword > :keyword')
@@ -95,7 +97,7 @@ class ProductRepository extends ServiceEntityRepository
                         ->setParameter('smoker',$search->getSmoker());
         }
         return $query->getQuery()
-                     ->getResult();
+                     ->getResult();*/
     }
 
 
