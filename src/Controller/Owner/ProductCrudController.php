@@ -13,14 +13,18 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_OWNER")
+ */
 class ProductCrudController extends AbstractCrudController
 {
     
     public const PRODUCTS_BASE_PATH = 'upload/images/products';
     public const PRODUCTS_UPLOAD_DIR = 'public/upload/images/products';
     
-    public static function getEntityFqcn(): string
+    public static function getEntityFqcn(): string 
     {
         return Product::class;
         
@@ -33,7 +37,7 @@ class ProductCrudController extends AbstractCrudController
         //$owners=$this->entityManager->getRepository(User::class)->findBy([
           //  'roles' => 'ROLE_OWNER']);
         //$contacts=$this->entityManager->getRepository(User::class)->findAll();
-                
+               
                 yield IdField::new('id')->hideOnForm()->hideOnIndex();
                 yield TextField::new('title', 'Nom du gîte');
                 yield ImageField::new('image')
