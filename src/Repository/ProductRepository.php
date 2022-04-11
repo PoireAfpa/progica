@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\Search;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -44,6 +45,59 @@ class ProductRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    public function findSearchByFields($field){
+        return $this->createQueryBuilder('q')
+        ->andWhere('q.keyword = :keyword')
+        ->setParameter('keyword', $field->getKeyword())
+        ->orderBy('q.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
+    ;
+    }
+
+    public function findAllSearch(Search $search): array{
+        $query = $this->createQueryBuilder('q');
+        if($search->getKeyword()){
+            $query = $query
+                        ->andWhere('q.keyword > :keyword')
+                        ->setParameter('keyword', $search->getKeyword());
+        }
+        if($search->getMinSurface()){
+            $query = $query
+                        ->andWhere('q.surface >= :minSurface')
+                        ->setParameter('minSurface', $search->getMinSurface());
+        }
+        if($search->getMinRoom()){
+            $query = $query
+                        ->andWhere('q.room >= :minRoom')
+                        ->setParameter('minRoom', $search->getMinRoom());
+        }
+        if($search->getMaxPrice()){
+            $query = $query
+                        ->andWhere('q.price <= :maxPrice')
+                        ->setParameter('maxPrice', $search->getMaxPrice());
+        }
+        if($search->getMinPeople()){
+            $query = $query
+                        ->andWhere('q.people >= :minPeople')
+                        ->setParameter('minPeople', $search->getMinPeople());
+        }
+        if($search->getPet()){
+            $query = $query
+                        ->andWhere('q.pet = :pet')
+                        ->setParameter('pet',$search->getPet());
+        }
+        if($search->getSmoker()){
+            $query = $query
+                        ->andWhere('q.smoker = :smoker')
+                        ->setParameter('smoker',$search->getSmoker());
+        }
+        return $query->getQuery()
+                     ->getResult();
+    }
+
 
     // /**
     //  * @return Product[] Returns an array of Product objects

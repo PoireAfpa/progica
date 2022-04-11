@@ -8,7 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\SearchType;
 use App\Entity\Product;
+use App\Entity\Search;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class DefaultController extends AbstractController
 {
@@ -20,29 +23,37 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function search(Request $request) : Response
+    #[Route('/product/search', name: 'app_product_search', methods: ['GET'])]
+    public function search(Request $request, ProductRepository $productRepository): Response
     {
-        $form = $this->createForm(SearchType::class);
+        $search = new Search();
+        $form = $this->createForm(SearchType::class, $search);
         $form->handleRequest($request);
 
+        $search = $productRepository->findAllSearch($search);
+    
         if ($form->isSubmitted() && $form->isValid()) {
-            $result=[
+            $search=[
                 $form->get('keyword')->getData(),
-                $form->get('cities')->getData(),
-                $form->get('price')->getData(),
-                $form->get('surface')->getData(),
-                $form->get('room')->getData(),
-                $form->get('people')->getData(),
-                $form->get('animal')->getData(),
+                $form->get('maxPrice')->getData(),
+                $form->get('minSurface')->getData(),
+                $form->get('minRoom')->getData(),
+                $form->get('minPeople')->getData(),
+                $form->get('pet')->getData(),
                 $form->get('smoker')->getData()
             ];
-            return $this->render('default/search.html.twig', [
-                'result' => $result,
+
+            return $this->render('search/product.html.twig', [
+                'search' => $search,
             ]);
+
+            return $this->redirectToRoute('app_product_index');
         }
 
         return $this->renderForm('layouts/partials/_property_search_section.html.twig', [
-            'form' => $form,
-            ]);
+            'search' => $search,
+            'form' => $form
+        ]);
     }
+
 }

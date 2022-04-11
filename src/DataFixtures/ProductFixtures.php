@@ -14,6 +14,7 @@ use App\DataFixtures\ContactFixtures;
 use Doctrine\Persistence\ObjectManager;
 use App\DataFixtures\OptionCostFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
@@ -29,7 +30,10 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create('fr_FR');
       
         $productOwners=$manager->getRepository(User::class)->findAll();
-        $cities=$manager->getRepository(Cities::class)->findAll();
+        $client = HttpClient::create();
+        $response=$client->request('GET', 'https://geo.api.gouv.fr/communes' );
+        $responseArray=$response->toarray();
+        $cities=array_column($responseArray,'nom');
         $optionCosts=$manager->getRepository(OptionCost::class)->findAll();
         $contacts = $manager->getRepository(Contact::class)->findAll();
         for ($i=1; $i<30; $i++){

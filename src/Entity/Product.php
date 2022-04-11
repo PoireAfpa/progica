@@ -101,11 +101,7 @@ class Product
      */
     private $contact;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Cities::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $cities;
+ 
 
     public function __construct()
     {
@@ -346,17 +342,4 @@ class Product
         return $this;
     }
 
-    public function getCities(): ?Cities
-    {
-        return $this->cities;
-    }
-
-    public function setCities(?Cities $cities): self
-    {
-        $this->cities = $cities;
-
-        return $this;
-    }
-
-   
 }
