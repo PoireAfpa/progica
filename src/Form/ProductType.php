@@ -57,11 +57,11 @@ class ProductType extends AbstractType
                   ]
             ])
             ->add('animal', CheckboxType::class, [
-                'label' => 'Animaux autorisés (Cochez si oui)',
+         
                 'required' => false
             ])
             ->add('smoker', CheckboxType::class, [
-                'label' => 'Gîte fumeur (Cochez si oui)',
+          
                 'required' => false
             ])
             ->add('animalCost', NumberType::class, [

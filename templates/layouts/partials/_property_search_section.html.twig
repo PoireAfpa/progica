@@ -11,44 +11,44 @@
       <form class="form-a">
         <div class="row">
 
-          <div class="col-md-12 mb-2">
+          <div class="col-md-12">
             <div class="form-group">
               <label class="pb-2" for="Type">Mot clé</label>
                 {{ form_widget(form.keyword) }}
             </div>
           </div>
 
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
+          <div class="col-md-6 mb-1">
+            <div class="form-group mt-1">
               <label class="pb-2" for="price">Prix EUR (hebdomadaire)</label>
               {{ form_widget(form.maxPrice) }}
             </div>
           </div>
 
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
+          <div class="col-md-6 mb-1">
+            <div class="form-group mt-1">
               <label class="pb-2" for="surface">Superficie</label>
               {{ form_widget(form.minSurface) }}
             </div>
           </div>
 
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
+          <div class="col-md-6">
+            <div class="form-group mt-1">
               <label class="pb-2" for="people">Nombre de personnes</label>
               {{ form_widget(form.minPeople) }}
             </div>
           </div>
 
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
+          <div class="col-md-6">
+            <div class="form-group mt-1">
               <label class="pb-2" for="room">Nombre de chambres</label>
               {{ form_widget(form.minRoom) }}
             </div>
           </div>
 
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
-              <label class="pb-2" for="smoker"></label>
+          <div class="col-md-6 ">
+            <div class="form-group">
+              <label class="pb-2" for="options"></label>
               {{ form_widget(form.smoker) }}
                {{ form_widget(form.pet) }}
                 {{ form_widget(form.options) }}
@@ -57,7 +57,7 @@
 
 
           <div class="col-md-12">
-            <button type="submit" class="btn btn-b">Chercher</button>
+            <button type="submit" class="btn btn-b w-100">Chercher</button>
           </div>
           
         </div>

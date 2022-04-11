@@ -15,18 +15,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
 {
-    #[Route('/product', name: 'app_product_index', methods: ['GET'])]
-    public function index(ProductRepository $productRepository): Response
+    #[Route('/product', name: 'app_product_index')]
+    public function index(ProductRepository $productRepository, Request $request): Response
     {
         $data=new Search();
         $form=$this->createForm(SearchType::class, $data);
-        $products = $productRepository->findAllSearch();
+        $form->handleRequest($request);
+       
 
+        if($form->isSubmitted() && $form->isValid()){
+        $search=$form->getData();
+        $products = $productRepository->findAllSearch($search);
+       
         return $this->render('product/index.html.twig', [
             'products' => $products,
-            'current_menu' => 'products',
+            
             'form'=>$form->createView()
         ]);
+    }
+    else{
+        $products = $productRepository->findAll();
+        return $this->render('product/index.html.twig', [
+            'products' => $products
+        ]);
+
+    }
+      
     }
 
     #[Route('/product/new', name: 'app_product_new', methods: ['GET', 'POST'])]

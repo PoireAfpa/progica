@@ -20,7 +20,7 @@ class SearchType extends AbstractType
     {
         $builder
             ->add('keyword', TextType::class, [
-                'label' => 'Mot clé',
+            
                 'required' => false
             ])
 
@@ -33,7 +33,7 @@ class SearchType extends AbstractType
             ])
 
             ->add('maxPrice', NumberType::class, [
-                'label' => 'Prix maximum',
+       
                 'required' => false,
                 "error_bubbling" => true,
                 'attr' => [
@@ -42,32 +42,32 @@ class SearchType extends AbstractType
              
             ])
             ->add('minSurface', NumberType::class, [
-                'label' => 'Surface du gîte',
+       
                 'required' => false,
                 'attr' => [
                     'min' => 0
                   ]
             ])
             ->add('minRoom', IntegerType::class, [
-                'label' => 'Nombre de pièces',
+       
                 'required' => false,
                 'attr' => [
                     'min' => 1
                   ]
             ])
             ->add('minPeople', IntegerType::class, [
-                'label' => 'Nombre de couchage',
+        
                 'required' => false,
                 'attr' => [
                     'min' => 1
                   ]
             ])
             ->add('pet', CheckboxType::class, [
-                'label' => 'Animaux (Cochez si oui)',
+                'label' => 'Animaux',
                 'required' => false
             ])
             ->add('smoker', CheckboxType::class, [
-                'label' => 'Fumeur (Cochez si oui)',
+                'label' => 'Fumeur',
                 'required' => false
             ]);
     }

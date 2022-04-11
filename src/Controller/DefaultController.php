@@ -16,11 +16,28 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'app_default')]
-    public function index(): Response
+    public function index(ProductRepository $productRepository, Request $request): Response
     {
+        $data=new Search();
+        $form=$this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+       
+
+        if($form->isSubmitted() && $form->isValid()){
+        $search=$form->getData();
+        $products = $productRepository->findAllSearch($search);
+       
+        return $this->render('product/index.html.twig', [
+            'products' => $products,
+            
+            'form'=>$form->createView()
+        ]);
+    }
+    else{
         return $this->render('default/index.html.twig', [
             'current_menu' => 'accueil'
         ]);
+    }
     }
 
     #[Route('/product/search', name: 'app_product_search', methods: ['GET'])]

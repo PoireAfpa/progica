@@ -57,47 +57,51 @@ class ProductRepository extends ServiceEntityRepository
     ;
     }
 
-    public function findAllSearch(): array{
+    public function findAllSearch(Search $search): array{
 
-        return $this->findAll();
-       /* $query = $this->createQueryBuilder('q');
-        if($search->getKeyword()){
-            $query = $query
-                        ->andWhere('q.keyword > :keyword')
-                        ->setParameter('keyword', $search->getKeyword());
+        $query=$this
+        ->createQueryBuilder('product');
+       
+
+        if (!empty ($search->getKeyword())){
+            
+            $query=$query
+            ->andWhere('product.title LIKE :keyword')
+            ->setParameter('keyword','%'.$search->getKeyword().'%');
         }
-        if($search->getMinSurface()){
+        if(!empty($search->getMinSurface())){
             $query = $query
-                        ->andWhere('q.surface >= :minSurface')
+                        ->andWhere('product.surface >= :minSurface')
                         ->setParameter('minSurface', $search->getMinSurface());
         }
         if($search->getMinRoom()){
             $query = $query
-                        ->andWhere('q.room >= :minRoom')
+                        ->andWhere('product.room >= :minRoom')
                         ->setParameter('minRoom', $search->getMinRoom());
         }
         if($search->getMaxPrice()){
             $query = $query
-                        ->andWhere('q.price <= :maxPrice')
+                        ->andWhere('product.price <= :maxPrice')
                         ->setParameter('maxPrice', $search->getMaxPrice());
         }
         if($search->getMinPeople()){
             $query = $query
-                        ->andWhere('q.people >= :minPeople')
+                        ->andWhere('product.people >= :minPeople')
                         ->setParameter('minPeople', $search->getMinPeople());
         }
         if($search->getPet()){
             $query = $query
-                        ->andWhere('q.pet = :pet')
-                        ->setParameter('pet',$search->getPet());
+                        ->andWhere('product.animal = 1');
+                      
         }
         if($search->getSmoker()){
             $query = $query
-                        ->andWhere('q.smoker = :smoker')
-                        ->setParameter('smoker',$search->getSmoker());
+                        ->andWhere('product.smoker = 1');
+                
         }
-        return $query->getQuery()
-                     ->getResult();*/
+
+        return $query->getQuery()->getResult();
+      
     }
 
 
