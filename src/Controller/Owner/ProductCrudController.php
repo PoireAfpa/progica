@@ -33,24 +33,24 @@ class ProductCrudController extends AbstractCrudController
         //$owners=$this->entityManager->getRepository(User::class)->findBy([
           //  'roles' => 'ROLE_OWNER']);
         //$contacts=$this->entityManager->getRepository(User::class)->findAll();
-      
-                yield IdField::new('id')->hideOnForm();
-                yield TextField::new('title');
+                
+                yield IdField::new('id')->hideOnForm()->hideOnIndex();
+                yield TextField::new('title', 'Nom du gîte');
                 yield ImageField::new('image')
                     ->setBasePath(self::PRODUCTS_BASE_PATH)
                     ->setUploadDir(self::PRODUCTS_UPLOAD_DIR)
                     ->setSortable(false);
-                yield TextEditorField::new('description');
-                yield  MoneyField::new('peakSeasonPrice')->setCurrency('EUR');
-                yield MoneyField::new('offSeasonPrice')->setCurrency('EUR');
-                yield IntegerField::new('surface');
-                yield IntegerField::new('room');
-                yield IntegerField::new('people');
-                yield BooleanField::new('animal')->renderAsSwitch( true, yield MoneyField::new('animalCost')->setCurrency('EUR'));
-                yield AssociationField::new('contact');
-                yield AssociationField::new('productOwner');
-                yield BooleanField::new('smoker');
-                yield SlugField::new('slug')->setTargetFieldName('title');
+                yield TextEditorField::new('description', 'Description');
+                yield  MoneyField::new('peakSeasonPrice', 'Prix haute saison')->setCurrency('EUR');
+                yield MoneyField::new('offSeasonPrice', 'Prix basse saison')->setCurrency('EUR');
+                yield IntegerField::new('surface', 'Superficie');
+                yield IntegerField::new('room', 'Chambres');
+                yield IntegerField::new('people', 'Personnes');
+                yield BooleanField::new('animal', 'Animaux')->renderAsSwitch( true, yield MoneyField::new('animalCost', 'Supplément animaux')->setCurrency('EUR'));
+                yield AssociationField::new('contact', 'Contact');
+                yield AssociationField::new('productOwner', 'Propriétaire')->hideOnForm()->hideOnIndex();
+                yield BooleanField::new('smoker', 'Fumeur');
+                yield SlugField::new('slug')->setTargetFieldName('title')->hideOnForm()->hideOnIndex();
             
      
         
