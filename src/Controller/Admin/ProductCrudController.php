@@ -13,7 +13,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class ProductCrudController extends AbstractCrudController
 {
     
@@ -30,9 +34,6 @@ class ProductCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        //$owners=$this->entityManager->getRepository(User::class)->findBy([
-          //  'roles' => 'ROLE_OWNER']);
-        //$contacts=$this->entityManager->getRepository(User::class)->findAll();
       
                 yield IdField::new('id')->hideOnForm();
                 yield TextField::new('title');

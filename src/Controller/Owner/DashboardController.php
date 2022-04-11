@@ -13,7 +13,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_OWNER")
+ */
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
@@ -37,7 +41,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Acceuil', 'fa fa-home');
+        yield MenuItem::linkToRoute('Acceuil', 'fa fa-home', 'app_default');
 
         yield MenuItem::section('Gîte');
 
