@@ -25,12 +25,6 @@ class SearchType extends AbstractType
                 'required' => false
             ])
 
-            ->add('cities', TextType::class,[
-                'required' => false,
-                'label' => 'Ville'
-            ])
-            ->add('lat')
-            ->add('lng')
 
             ->add('options', EntityType::class,[
                 'choice_label' => 'name',

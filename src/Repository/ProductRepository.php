@@ -58,16 +58,7 @@ class ProductRepository extends ServiceEntityRepository
     }
 
   
-    public function findOneBySomeField($value): ?Product
-    {
-        
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.owner = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
+   
 
     public function findAllSearch(Search $search): array{
 
@@ -78,7 +69,7 @@ class ProductRepository extends ServiceEntityRepository
         if (!empty ($search->getKeyword())){
             
             $query=$query
-            ->andWhere('product.cities LIKE :keyword')
+            ->andWhere('product.title LIKE :keyword')
             ->setParameter('keyword','%'.$search->getKeyword().'%');
         }
         if(!empty($search->getMinSurface())){

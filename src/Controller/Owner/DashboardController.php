@@ -41,15 +41,15 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        $owner=$_SESSION['login_user'];
+        
 
         yield MenuItem::linkToRoute('Acceuil', 'fa fa-home', 'app_default');
 
       
 
         yield MenuItem::subMenu('Products', 'fas fa-bars')->setSubItems([
-            yield MenuItem::linkToCrud('Create Product', 'fas fa-plus', Product::class)->setAction(Crud::PAGE_NEW),
-            yield  MenuItem::linkToCrud('Show Products', 'fas fa-eye', Product::class) 
+             MenuItem::linkToCrud('Create Product', 'fas fa-plus', Product::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Products', 'fas fa-eye', Product::class) 
         ]);
 
      
