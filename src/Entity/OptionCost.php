@@ -74,4 +74,8 @@ class OptionCost
 
         return $this;
     }
+
+    public function __tostring(){
+        return $this->price;
+    }
 }

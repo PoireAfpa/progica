@@ -11,6 +11,9 @@ use phpDocumentor\Reflection\Types\Boolean;
 class Search
 {
     private $keyword;
+    private $cities;
+    private $lat;
+    private $lng;
     private $maxPrice;
     private $minSurface;
     private $minRoom;
@@ -18,6 +21,7 @@ class Search
     private $pet;
     private $smoker;
     private $options;
+
 
     
     /**
@@ -173,6 +177,66 @@ class Search
     public function setOptions($options)
     {
         $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cities
+     */ 
+    public function getCities()
+    {
+        return $this->cities;
+    }
+
+    /**
+     * Set the value of cities
+     *
+     * @return  self
+     */ 
+    public function setCities($cities)
+    {
+        $this->cities = $cities;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lat
+     */ 
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set the value of lat
+     *
+     * @return  self
+     */ 
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lng
+     */ 
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Set the value of lng
+     *
+     * @return  self
+     */ 
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
 
         return $this;
     }

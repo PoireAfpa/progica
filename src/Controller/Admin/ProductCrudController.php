@@ -42,9 +42,10 @@ class ProductCrudController extends AbstractCrudController
                     ->setUploadDir(self::PRODUCTS_UPLOAD_DIR)
                     ->setSortable(false);
                 yield TextEditorField::new('description');
-                yield  MoneyField::new('peakSeasonPrice')->setCurrency('EUR');
+                yield MoneyField::new('peakSeasonPrice')->setCurrency('EUR');
                 yield MoneyField::new('offSeasonPrice')->setCurrency('EUR');
                 yield IntegerField::new('surface');
+                yield TextField::new('cities','Ville');
                 yield IntegerField::new('room');
                 yield IntegerField::new('people');
                 yield BooleanField::new('animal')->renderAsSwitch( true, yield MoneyField::new('animalCost')->setCurrency('EUR'));

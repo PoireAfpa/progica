@@ -1,4 +1,8 @@
-  <div class="intro intro-carousel swiper position-relative">
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  
+
+ <div class="intro intro-carousel swiper position-relative">
 
     <div class="swiper-wrapper">
 
@@ -80,3 +84,68 @@
     </div>
     <div class="swiper-pagination"></div>
   </div>
+
+  <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+ 
+
+          <form role="form" class="form-horizontal">
+            <fieldset>
+               <div class="form-group">
+                <label class="col-sm-4 control-label">Address</label>
+                <div class="col-sm-8">
+                  <input id="user_input_autocomplete_address" name="user_input_autocomplete_address"
+                         class="form-control" placeholder="Start typing your address...">
+                </div>
+              </div>
+            </fieldset>
+
+          
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAX_PKnE1aCfuAx2XIgmXkV6Td_DjzdTHw&libraries=places&callback=initAutocomplete" async defer></script>
+
+    <script type="text/javascript" src="autocomplete.js"></script>
+  </body>
+</html>
+<script>
+function initializeAutocomplete(id) {
+  var element = document.getElementById(id);
+  if (element) {
+    var autocomplete = new google.maps.places.Autocomplete(element, { types: ['locality'] });
+    google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+  }
+}
+
+function onPlaceChanged() {
+  var place = this.getPlace();
+
+console.log(place);  // Uncomment this line to view the full object returned by Google API.
+
+  for (var i in place.address_components) {
+    var component = place.address_components[i];
+    for (var j in component.types) {  // Some types are ["country", "political"]
+      var type_element = document.getElementById(component.types[j]);
+      if (type_element) {
+        type_element.value = component.long_name;
+      }
+    }
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', function() {
+  initializeAutocomplete('user_input_autocomplete_address');
+});
+
+</script>  </body>
+</html>-->

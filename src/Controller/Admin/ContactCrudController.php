@@ -3,12 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contact;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 /**
  * @IsGranted("ROLE_ADMIN")
@@ -23,13 +24,13 @@ class ContactCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('firstName', 'Prénom'),
-            TextField::new('lastName', 'Nom'),
-            Field::new('email'),
-            TextEditorField::new('message')
-        ];
+       
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('firstName', 'Prénom');
+        yield TextField::new('lastName', 'Nom');
+        yield Field::new('email');
+        yield TextEditorField::new('message');
+        yield  SlugField::new('slug')->setTargetFieldName('firstName');
     }
 
 }

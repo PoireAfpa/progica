@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Option;
 use App\Repository\CitiesRepository;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -23,6 +24,13 @@ class SearchType extends AbstractType
             
                 'required' => false
             ])
+
+            ->add('cities', TextType::class,[
+                'required' => false,
+                'label' => 'Ville'
+            ])
+            ->add('lat')
+            ->add('lng')
 
             ->add('options', EntityType::class,[
                 'choice_label' => 'name',

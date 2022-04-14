@@ -57,6 +57,18 @@ class ProductRepository extends ServiceEntityRepository
     ;
     }
 
+  
+    public function findOneBySomeField($value): ?Product
+    {
+        
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.owner = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function findAllSearch(Search $search): array{
 
         $query=$this
@@ -66,7 +78,7 @@ class ProductRepository extends ServiceEntityRepository
         if (!empty ($search->getKeyword())){
             
             $query=$query
-            ->andWhere('product.title LIKE :keyword')
+            ->andWhere('product.cities LIKE :keyword')
             ->setParameter('keyword','%'.$search->getKeyword().'%');
         }
         if(!empty($search->getMinSurface())){
@@ -81,7 +93,7 @@ class ProductRepository extends ServiceEntityRepository
         }
         if($search->getMaxPrice()){
             $query = $query
-                        ->andWhere('product.price <= :maxPrice')
+                        ->andWhere('product.peakSeasonPrice <= :maxPrice')
                         ->setParameter('maxPrice', $search->getMaxPrice());
         }
         if($search->getMinPeople()){
@@ -102,7 +114,7 @@ class ProductRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
       
-    }
+        
 
 
     // /**
@@ -133,4 +145,5 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+}
 }

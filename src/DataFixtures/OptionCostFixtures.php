@@ -51,4 +51,5 @@ class OptionCostFixtures extends Fixture implements FixtureGroupInterface
     {
         return ['group1'];
     }
+  
 }

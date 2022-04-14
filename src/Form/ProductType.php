@@ -26,6 +26,11 @@ class ProductType extends AbstractType
             ->add('image', TextType::class, [
                 'label' => 'Photo'
             ])
+            ->add('cities', TextType::class,[
+                'label' => 'Ville'
+            ])
+            ->add('lat')
+            ->add('lng')
             ->add('peakSeasonPrice', NumberType::class, [
                 'label' => 'Prix haute saison',
                 'attr' => [

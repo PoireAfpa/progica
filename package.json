@@ -19,6 +19,10 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "bootstrap-slider": "^11.0.2"
+        "algoliasearch": "^4.13.0",
+        "bootstrap-slider": "^11.0.2",
+        "esm": "^3.2.25",
+        "instantsearch.js": "^4.40.3",
+        "places.js": "^1.19.0"
     }
 }

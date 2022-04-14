@@ -106,6 +106,16 @@ class Product
      */
     private $contact;
 
+    /**
+     * @ORM\Column(type="float", scale=4, precision=6, nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", scale=4,precision=7, nullable=true)
+     */
+    private $lng;
+
  
 
     public function __construct()
@@ -366,5 +376,45 @@ class Product
         $this->cities = $cities;
 
         return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getTest(): ?Contact
+    {
+        return $this->test;
+    }
+
+    public function setTest(?Contact $test): self
+    {
+        $this->test = $test;
+
+        return $this;
+    }
+
+    public function __tostring(){
+        return $this->title;
     }
 }

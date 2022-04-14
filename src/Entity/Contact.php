@@ -49,9 +49,15 @@ class Contact
      */
     private $availabilities;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="contact")
+     */
+    private $product;
+
     public function __construct()
     {
         $this->availabilities = new ArrayCollection();
+        $this->product = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,6 +161,36 @@ class Contact
     public function __toString()
     {
         return $this->firstName ." ". $this->lastName;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProduct(): Collection
+    {
+        return $this->product;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->product->contains($product)) {
+            $this->product[] = $product;
+            $product->setTest($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->product->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getTest() === $this) {
+                $product->setTest(null);
+            }
+        }
+
+        return $this;
     }
 
 }
